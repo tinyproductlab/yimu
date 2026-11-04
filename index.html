@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一幕 YiMu — 极简、优雅的家庭影院串流播放器</title>
+<link rel="canonical" href="https://ym.tinylabpro.com/">
+<meta property="og:title" content="一幕 YiMu — 极简、优雅的家庭影院串流播放器">
+<meta property="og:description" content="Mac · iOS · Apple TV 三端互通：NAS 媒体库海报墙、电视直播极速切台、Apple TV 跨屏免输密码、端侧 AI 字幕翻译。坚守零上云隐私承诺。">
+<meta property="og:url" content="https://ym.tinylabpro.com/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://ym.tinylabpro.com/assets/icon.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="一幕 YiMu — 极简、优雅的家庭影院串流播放器">
+<meta name="twitter:description" content="家庭影院串流首选：NAS 媒体库海报墙、电视直播极速换台、Apple TV 跨屏免输密码直传。">
+<meta name="description" content="一幕 YiMu：面向 Mac、iOS 与 Apple TV 的极简本地家庭影院播放器。支持 SMB/WebDAV 局域网串流、电影海报墙、电视直播手势快捷换台、Apple TV 动态二维码密码直传与本地端侧 AI 字幕翻译。">
+<link rel="icon" href="assets/icon.png" sizes="any">
+<link rel="apple-touch-icon" href="assets/icon.png">
+
+<style>
+  :root {
+    --primary: #0071E3;
+    --primary-light: #479BF5;
+    --primary-dark: #004CB0;
+    --accent: #25B96F;
+    --ink: #142A4A;
+    --ink-soft: #4B5E7E;
+    --bg: #F7FAFF;
+    --card: #FFFFFF;
+    --border: #E3EAF7;
+    --hero-bg: #0B1E3E;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Segoe UI", "Microsoft YaHei", sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 22px; }
+
+  /* Lang switch */
+  .lang-switch {
+    position: fixed; top: 18px; right: 20px; z-index: 100;
+    display: flex; gap: 4px;
+    background: rgba(11,30,62,.65);
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 999px; padding: 4px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .lang-switch button {
+    border: none; background: transparent; color: rgba(255,255,255,.75);
+    font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 999px;
+    cursor: pointer; transition: background .15s, color .15s;
+  }
+  .lang-switch button.active { background: #fff; color: var(--primary-dark); }
+
+  /* Floating coffee button (top-right) */
+  .coffee-fab {
+    position: fixed; top: 18px; right: 132px; z-index: 100;
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #c28a22; color: #1f1707;
+    border: none; border-radius: 999px;
+    padding: 9px 16px; font-size: 13px; font-weight: 700;
+    cursor: pointer; white-space: nowrap;
+    box-shadow: 0 6px 20px rgba(0,0,0,.25);
+    transition: background .15s, transform .15s;
+  }
+  .coffee-fab:hover { background: #d39a2c; transform: translateY(-1px); }
+  .coffee-fab::before { content: "♡"; font-size: 15px; }
+
+  /* Coffee modal */
+  .coffee-modal {
+    display: none;
+    position: fixed; inset: 0; z-index: 300;
+    background: rgba(0,0,0,.6);
+    align-items: center; justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+  }
+  .coffee-modal.open { display: flex; }
+  .coffee-modal-content {
+    background: var(--hero-bg); color: #fff;
+    border-radius: 22px; padding: 32px 28px;
+    max-width: 420px; width: 100%;
+    text-align: center; position: relative;
+    box-shadow: 0 24px 60px rgba(0,0,0,.45);
+    border: 1px solid rgba(255,255,255,.15);
+  }
+  .coffee-modal-close {
+    position: absolute; top: 14px; right: 16px;
+    background: rgba(255,255,255,.12); color: #fff;
+    border: none; border-radius: 50%;
+    width: 32px; height: 32px; font-size: 18px;
+    cursor: pointer; display: grid; place-items: center;
+  }
+  .coffee-modal-close:hover { background: rgba(255,255,255,.22); }
+  .coffee-modal h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .coffee-modal p { color: rgba(255,255,255,.7); font-size: 13px; margin-bottom: 20px; }
+  .coffee-modal-codes { display: flex; justify-content: center; gap: 18px; }
+  .coffee-modal-codes a {
+    display: flex; flex-direction: column; align-items: center; gap: 7px;
+    color: rgba(255,255,255,.8); font-size: 12px; font-weight: 600;
+    text-decoration: none;
+  }
+  .coffee-modal-codes img {
+    width: 124px; height: 124px; border-radius: 12px;
+    padding: 4px; background: #fff;
+  }
+
+  @media (max-width: 640px) {
+    .coffee-fab { right: 16px; top: auto; bottom: 20px; padding: 10px 16px; }
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #0A1630 0%, #0F2854 55%, #184494 100%);
+    color: #fff;
+    padding: 88px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 48px;
+    align-items: center;
+    text-align: left;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    width: 580px; height: 580px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(71,155,245,.28), transparent 65%);
+    top: -220px; right: -140px;
+    pointer-events: none;
+  }
+  .hero .logo {
+    width: 96px; height: 96px;
+    border-radius: 22px;
+    box-shadow: 0 14px 44px rgba(0,0,0,.45);
+    margin-bottom: 22px;
+    background: #fff;
+  }
+  .hero h1 { font-size: 46px; font-weight: 800; letter-spacing: .5px; line-height: 1.15; }
+  .hero .tagline { font-size: 20px; opacity: .92; margin-top: 14px; font-weight: 600; color: #EAF2FF; }
+  .hero .sub { font-size: 15px; opacity: .72; margin-top: 10px; line-height: 1.5; }
+  .hero .cta { margin-top: 28px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 44px; padding: 10px 22px; border-radius: 999px;
+    white-space: nowrap; font-size: 14px; font-weight: 700; text-decoration: none;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary { background: #fff; color: var(--primary-dark); box-shadow: 0 6px 20px rgba(0,0,0,.28); }
+  .btn-ghost { border: 1.5px solid rgba(255,255,255,.55); color: #fff; }
+  .btn:hover { transform: translateY(-2px); }
+  .hero .store-note { margin-top: 16px; font-size: 13px; color: rgba(255,255,255,.8); }
+  .hero .store-note span { opacity: .7; margin: 0 4px; }
+
+  /* Hero carousel */
+  .hero-carousel { position: relative; max-width: 260px; width: 100%; margin: 0 auto; }
+  .phone-frame {
+    background: #0A1630;
+    border: 2px solid rgba(255,255,255,.22);
+    border-radius: 44px;
+    padding: 10px;
+    box-shadow: 0 28px 70px rgba(0,0,0,.5);
+  }
+  .slides { position: relative; overflow: hidden; border-radius: 34px; aspect-ratio: 9 / 19.5; background: #000; }
+  .slides img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: top;
+    opacity: 0; transform: scale(0.96);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .slides img.active { opacity: 1; transform: scale(1); }
+  .dots { display: flex; gap: 8px; justify-content: center; margin-top: 16px; }
+  .dots button {
+    width: 8px; height: 8px; padding: 0; border: none; border-radius: 50%;
+    background: rgba(255,255,255,.35); cursor: pointer;
+    transition: background .3s, transform .3s;
+  }
+  .dots button.active { background: #fff; transform: scale(1.3); }
+
+  /* Security / Promise Strip */
+  .security { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 22px 0; }
+  .security .pills { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .pill {
+    background: #EAF2FF; color: var(--primary-dark); border-radius: 999px;
+    padding: 8px 18px; font-size: 13px; font-weight: 700;
+  }
+
+  /* Sections */
+  section { padding: 64px 0; }
+  .section-title { text-align: center; font-size: 30px; font-weight: 800; margin-bottom: 8px; }
+  .section-desc { text-align: center; color: var(--ink-soft); font-size: 15px; margin-bottom: 40px; }
+
+  /* Feature grid */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 20px; }
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+    padding: 28px 24px; transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(0,113,227,.12); }
+  .card .icon { font-size: 32px; }
+  .card h3 { font-size: 18px; font-weight: 700; margin: 12px 0 6px; }
+  .card p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+  .card .tag { display: inline-block; margin-top: 12px; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 6px; background: #F0F4FC; color: var(--primary-dark); }
+
+  /* Spotlight Banner */
+  .spotlight {
+    background: linear-gradient(135deg, #112242 0%, #1A376B 100%);
+    border-radius: 22px; padding: 44px 38px; color: #fff;
+    display: grid; grid-template-columns: 1.2fr .8fr; gap: 32px; align-items: center;
+    box-shadow: 0 18px 48px rgba(0,0,0,.25);
+  }
+  .spotlight h3 { font-size: 24px; font-weight: 800; margin-bottom: 12px; }
+  .spotlight p { font-size: 14px; opacity: .85; line-height: 1.7; margin-bottom: 16px; }
+  .spotlight ul { padding-left: 20px; font-size: 13px; opacity: .9; line-height: 1.8; }
+  .spotlight-box {
+    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18);
+    border-radius: 18px; padding: 24px; text-align: center;
+  }
+
+  /* Letter to users */
+  .letter-box {
+    background: #fff; border: 1px solid var(--border); border-radius: 22px;
+    padding: 44px 36px; max-width: 860px; margin: 0 auto;
+    box-shadow: 0 8px 30px rgba(0,0,0,.03);
+  }
+  .letter-box h2 { font-size: 22px; font-weight: 800; margin-bottom: 16px; color: var(--ink); text-align: center; }
+  .letter-body { color: var(--ink); font-size: 15px; line-height: 1.8; }
+  .letter-body p { margin-bottom: 14px; }
+  .letter-body h3 { font-size: 17px; font-weight: 700; margin: 24px 0 8px; color: var(--ink); }
+  .letter-body blockquote {
+    border-left: 4px solid var(--primary); padding-left: 14px; margin: 16px 0;
+    color: var(--primary-dark); font-style: italic;
+  }
+  .letter-body ul { padding-left: 22px; margin-bottom: 14px; }
+  .letter-body li { margin-bottom: 6px; }
+
+  /* Footer */
+  footer {
+    background: #0B162C; color: #fff; padding: 56px 0 40px;
+    border-top: 1px solid rgba(255,255,255,.1); text-align: center;
+  }
+  footer .wechat {
+    display: inline-flex; flex-direction: column; align-items: center; gap: 8px;
+    margin-bottom: 28px;
+  }
+  footer .wechat img {
+    border-radius: 14px; background: #fff; padding: 4px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.3);
+  }
+  footer .wechat-name { font-size: 15px; font-weight: 700; color: #fff; }
+  footer .wechat-tip { font-size: 12px; color: rgba(255,255,255,.6); }
+  footer .links {
+    display: flex; gap: 18px; justify-content: center; flex-wrap: wrap;
+    font-size: 13px; font-weight: 600; margin-bottom: 20px;
+  }
+  footer .links a { color: rgba(255,255,255,.75); text-decoration: none; }
+  footer .links a:hover { color: #fff; text-decoration: underline; }
+  footer .copy { font-size: 12px; color: rgba(255,255,255,.45); }
+
+  @media (max-width: 820px) {
+    .hero-inner { grid-template-columns: 1fr; text-align: center; }
+    .hero .cta { justify-content: center; }
+    .hero .logo { margin: 0 auto 20px; }
+    .spotlight { grid-template-columns: 1fr; text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Language Switch -->
+  <div class="lang-switch">
+    <button id="lang-zh" class="active" onclick="setLang('zh')">中文</button>
+    <button id="lang-en" onclick="setLang('en')">EN</button>
+  </div>
+
+  <!-- Floating Coffee Button -->
+  <button class="coffee-fab" onclick="openCoffee()">
+    <span data-zh="请喝咖啡" data-en="Support Us">请喝咖啡</span>
+  </button>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container hero-inner">
+      <div>
+        <img src="assets/icon.png" alt="一幕 YiMu 图标" class="logo" width="96" height="96">
+        <h1 data-zh="一幕 YiMu" data-en="YiMu Player">一幕 YiMu</h1>
+        <div class="tagline" data-zh="极简、优雅的家庭影院串流播放器" data-en="Minimalist, elegant home theater streaming player">极简、优雅的家庭影院串流播放器</div>
+        <div class="sub" data-zh="Mac · iOS · Apple TV 三端互通 ｜ NAS 媒体库海报墙 ｜ 电视直播极速换台 ｜ 坚守零上云隐私承诺" data-en="Unified across Mac, iOS & Apple TV. Movie poster wall, instant live TV channel flipping, zero-cloud privacy.">
+          Mac · iOS · Apple TV 三端互通 ｜ NAS 媒体库海报墙 ｜ 电视直播极速换台 ｜ 坚守零上云隐私承诺
+        </div>
+        <div class="cta">
+          <a href="#download" class="btn btn-primary" data-zh="🍎 App Store 下载 (iOS / tvOS)" data-en="🍎 App Store (iOS & tvOS)">🍎 App Store 下载 (iOS / tvOS)</a>
+          <a href="#download" class="btn btn-ghost" data-zh="💻 Mac 直装版" data-en="💻 Mac Direct DMG">💻 Mac 直装版</a>
+          <a href="https://github.com/tinyproductlab/yimu-site" target="_blank" class="btn btn-ghost" data-zh="⭐ GitHub 源码" data-en="⭐ GitHub Source">⭐ GitHub 源码</a>
+        </div>
+        <div class="store-note">
+          <span data-zh="零第三方追踪" data-en="Zero Trackers">零第三方追踪</span>·
+          <span data-zh="系统本地钥匙串直存" data-en="Keychain Secured">系统本地钥匙串直存</span>·
+          <span data-zh="中立开放 JSON 架构" data-en="Open JSON Data">中立开放 JSON 架构</span>
+        </div>
+      </div>
+
+      <!-- Hero Phone Showcase (实机截图轮播) -->
+      <div class="hero-carousel">
+        <div class="phone-frame">
+          <div class="slides" id="hero-slides">
+            <!-- 动态注入截图 -->
+          </div>
+        </div>
+        <div class="dots" id="hero-dots"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Security & Privacy Strip -->
+  <div class="security">
+    <div class="container pills">
+      <div class="pill" data-zh="🛡️ 坚守零上云隐私承诺" data-en="🛡️ Zero Cloud Privacy">🛡️ 坚守零上云隐私承诺</div>
+      <div class="pill" data-zh="🔐 密码只存本地钥匙串" data-en="🔐 Local Keychain Only">🔐 密码只存本地钥匙串</div>
+      <div class="pill" data-zh="⚡ 电视手势与按键极速切台" data-en="⚡ Gesture Channel Switch">⚡ 电视手势与按键极速切台</div>
+      <div class="pill" data-zh="🎬 影院竖版海报墙" data-en="🎬 Cinema Poster Wall">🎬 影院竖版海报墙</div>
+      <div class="pill" data-zh="🤖 本地端侧 AI 视频字幕翻译" data-en="🤖 On-Device AI Subtitles">🤖 本地端侧 AI 视频字幕翻译</div>
+      <div class="pill" data-zh="📱 跨屏二维码免输密码直传" data-en="📱 QR Code Apple TV Sync">📱 跨屏二维码免输密码直传</div>
+    </div>
+  </div>
+
+  <!-- Main Features Grid -->
+  <section id="features">
+    <div class="container">
+      <h2 class="section-title" data-zh="六大核心体验，为家庭影音而生" data-en="Crafted for Pure Home Theater">六大核心体验，为家庭影音而生</h2>
+      <p class="section-desc" data-zh="不臃肿、不骚扰、不卖会员。把播放器应有的优雅与快，做到极致。" data-en="No bloat, no ads, no subscriptions. Pure streaming performance.">不臃肿、不骚扰、不卖会员。把播放器应有的优雅与快，做到极致。</p>
+
+      <div class="grid">
+        <div class="card">
+          <div class="icon">🎬</div>
+          <h3 data-zh="影院级海报墙与卡片视图" data-en="Cinema Poster Wall & Cards">影院级海报墙与卡片视图</h3>
+          <p data-zh="支持 2:3 电影竖版海报、16:9 网格卡片与标准列表四种视图自由切换。自动打上 4K HDR、1080P 专属金白角标，全本地客户端刮削，无服务端门槛。" data-en="2:3 vertical movie poster wall, 16:9 grid cards and standard lists. Auto 4K HDR badges, pure client-side metadata scraping.">
+            支持 2:3 电影竖版海报、16:9 网格卡片与标准列表四种视图自由切换。自动打上 4K HDR、1080P 专属金白角标，全本地客户端刮削，无服务端门槛。
+          </p>
+          <span class="tag">Poster Wall · 4K HDR · 客户端刮削</span>
+        </div>
+
+        <div class="card">
+          <div class="icon">📡</div>
+          <h3 data-zh="电视直播与全屏手势切台" data-en="Live TV & Gesture Flipping">电视直播与全屏手势切台</h3>
+          <p data-zh="内置精选极清央视与核心卫视官方源，支持导入 M3U/TXT 片单。全屏播放支持上滑/下滑/左右轻扫瞬时切台、两侧悬浮快捷按键、侧边换台抽屉与大字号 OSD。" data-en="Direct official CDN live channels. Swipe up/down/left/right to switch channels instantly, on-screen quick buttons, channel drawer and OSD.">
+            内置精选极清央视与核心卫视官方源，支持导入 M3U/TXT 片单。全屏播放支持上滑/下滑/左右轻扫瞬时切台、两侧悬浮快捷按键、侧边换台抽屉与大字号 OSD。
+          </p>
+          <span class="tag">IPTV · 手势切台 · 换台抽屉 · OSD</span>
+        </div>
+
+        <div class="card">
+          <div class="icon">🔐</div>
+          <h3 data-zh="创新 Apple TV 免输密码握手" data-en="Apple TV Instant Password Sync">创新 Apple TV 免输密码握手</h3>
+          <p data-zh="解决电视上用遥控器按字母输入 NAS 复杂密码的噩梦。电视端生成动态一次性二维码，手机扫码 Face ID 认证，端对端局域网 TLS 加密直接写入电视钥匙串。" data-en="Solve the nightmare of typing passwords on TV with a remote. Apple TV shows dynamic QR code, iPhone scans to decrypt and securely transfers via TLS.">
+            解决电视上用遥控器按字母输入 NAS 复杂密码的噩梦。电视端生成动态一次性二维码，手机扫码 Face ID 认证，端对端局域网 TLS 加密直接写入电视钥匙串。
+          </p>
+          <span class="tag">局域网加密 · 零泄露 · 解决电视输入痛点</span>
+        </div>
+
+        <div class="card">
+          <div class="icon">🤖</div>
+          <h3 data-zh="本地端侧 AI 视频字幕翻译" data-en="On-Device AI Subtitle Translation">本地端侧 AI 视频字幕翻译</h3>
+          <p data-zh="集成 Apple 原生端侧翻译与 WhisperKit 本地语音转文字引擎。外语生肉大片离线实时生成双语字幕，零云端 API 费用、零隐私泄露、超低延迟观影。" data-en="Native Apple translation & WhisperKit on-device speech-to-text. Generate offline bilingual subtitles in real-time with zero cloud costs.">
+            集成 Apple 原生端侧翻译与 WhisperKit 本地语音转文字引擎。外语生肉大片离线实时生成双语字幕，零云端 API 费用、零隐私泄露、超低延迟观影。
+          </p>
+          <span class="tag">Apple 端侧 · WhisperKit · 实时双语</span>
+        </div>
+
+        <div class="card">
+          <div class="icon">🌐</div>
+          <h3 data-zh="私有局域网极速串流" data-en="High-Speed Local LAN Streaming">私有局域网极速串流</h3>
+          <p data-zh="原生直连群晖、极空间、威联通、TrueNAS、Windows 共享与 WebDAV。无需在 NAS 上安装任何繁重服务端，原生硬件解码直出，4K 高码率不卡顿。" data-en="Native SMB and WebDAV direct connection to Synology, QNAP, TrueNAS and Windows shares. No heavy server software required.">
+            原生直连群晖、极空间、威联通、TrueNAS、Windows 共享与 WebDAV。无需在 NAS 上安装任何繁重服务端，原生硬件解码直出，4K 高码率不卡顿。
+          </p>
+          <span class="tag">SMB · WebDAV · 硬件直解 · 零额外负担</span>
+        </div>
+
+        <div class="card">
+          <div class="icon">📸</div>
+          <h3 data-zh="本地照片流与一键成片浏览" data-en="Photo Slideshow Viewer">本地照片流与一键成片浏览</h3>
+          <p data-zh="不仅是视频播放器，更是家庭回忆相框。支持从相册或文件夹批量读取高画质照片，以柔和电影转场与背景音乐生成一键幻灯成片放映。" data-en="More than videos — a living family digital frame. Beautiful cinematic transitions and background music for your photo memories.">
+            不仅是视频播放器，更是家庭回忆相框。支持从相册或文件夹批量读取高画质照片，以柔和电影转场与背景音乐生成一键幻灯成片放映。
+          </p>
+          <span class="tag">电影转场 · 音乐成片 · 电视相框</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spotlight Section: Apple TV 密码直传解决方案 -->
+  <section style="padding: 20px 0 60px;">
+    <div class="container">
+      <div class="spotlight">
+        <div>
+          <h3 data-zh="解决 Apple TV 最大的痛点：输入密码" data-en="Solving Apple TV's Biggest Pain: Typing Passwords">解决 Apple TV 最大的痛点：输入密码</h3>
+          <p data-zh="在电视上用遥控器按字母输入几十位复杂的群晖或极空间密码是所有人的噩梦。一幕开创了优雅直觉的局域网端对端安全握手：" data-en="Typing a 20-character complex NAS password on Apple TV using a remote is agonizing. YiMu introduces effortless peer-to-peer secure sync:">
+            在电视上用遥控器按字母输入几十位复杂的群晖或极空间密码是所有人的噩梦。一幕开创了优雅直觉的局域网端对端安全握手：
+          </p>
+          <ul>
+            <li data-zh="📺 电视生成动态安全码：含一次性临时握手令牌（二维码绝不包含明文密码）。" data-en="📺 Dynamic QR on TV: Contains one-time handshake token with zero plaintext passwords.">📺 电视生成动态安全码：含一次性临时握手令牌（二维码绝不包含明文密码）。</li>
+            <li data-zh="📱 手机对准即扫：在 iPhone 上勾选需要共享的 NAS 或直播源，Face ID 验证主人身份。" data-en="📱 Phone Point & Scan: Select connections to share, authenticate securely via Face ID.">📱 手机对准即扫：在 iPhone 上勾选需要共享的 NAS 或直播源，Face ID 验证主人身份。</li>
+            <li data-zh="🔐 端对端加密直接入库：手机钥匙串提取密码后经局域网加密投递，Apple TV 安全写入本机钥匙串。" data-en="🔐 End-to-End Encryption: Transferred encrypted via local Wi-Fi directly into Apple TV Keychain.">🔐 端对端加密直接入库：手机钥匙串提取密码后经局域网加密投递，Apple TV 安全写入本机钥匙串。</li>
+          </ul>
+        </div>
+        <div class="spotlight-box">
+          <div style="font-size: 52px; margin-bottom: 12px;">📺 ⇄ 📱</div>
+          <div style="font-size: 16px; font-weight: 700; color: #fff;" data-zh="点对点跨屏安全直通" data-en="Peer-to-Peer Cross Screen Sync">点对点跨屏安全直通</div>
+          <div style="font-size: 12px; opacity: .75; margin-top: 6px;" data-zh="全流程局域网加密，绝不经过第三方服务器" data-en="100% local LAN encryption, never passes through any third-party server">全流程局域网加密，绝不经过第三方服务器</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Letter to Users (致用户的一封信) -->
+  <section style="background: #F0F4FC; padding: 60px 0;">
+    <div class="container">
+      <div class="letter-box">
+        <h2 data-zh="来自创作者的一封信" data-en="A Letter from the Creator">来自创作者的一封信</h2>
+        <div class="letter-body" id="letter-body"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section style="background: #fff; border-top: 1px solid var(--border);">
+    <div class="container" style="max-width: 860px; padding: 48px 22px;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; color: var(--ink);" data-zh="常见问题解答" data-en="Frequently Asked Questions">常见问题解答</h2>
+
+      <details style="margin-bottom: 14px; background: #F8FAFD; border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px;">
+        <summary style="cursor: pointer; font-weight: 700; color: var(--ink);" data-zh="一幕需要注册账号吗？" data-en="Do I need to create an account?">一幕需要注册账号吗？</summary>
+        <p style="margin-top: 8px; color: var(--ink-soft); font-size: 14px;" data-zh="完全不需要。一幕坚守零上云、无账号、本地钥匙串保存的理念。所有媒体库记录、播放进度与连接配置完全保存在您自己的设备中。" data-en="Never. YiMu requires no accounts, no logins, and zero cloud tracking. Everything is saved locally on your device.">完全不需要。一幕坚守零上云、无账号、本地钥匙串保存的理念。所有媒体库记录、播放进度与连接配置完全保存在您自己的设备中。</p>
+      </details>
+
+      <details style="margin-bottom: 14px; background: #F8FAFD; border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px;">
+        <summary style="cursor: pointer; font-weight: 700; color: var(--ink);" data-zh="需要像 Plex / Jellyfin 那样在 NAS 上安装服务端吗？" data-en="Do I need to install server software on NAS like Plex or Jellyfin?">需要像 Plex / Jellyfin 那样在 NAS 上安装服务端吗？</summary>
+        <p style="margin-top: 8px; color: var(--ink-soft); font-size: 14px;" data-zh="不需要。一幕采用纯客户端刮削与直连串流技术，支持直连 SMB 和 WebDAV，NAS 只要开启标准的共享文件夹即可播放，零负担、免运维。" data-en="No! YiMu connects directly via SMB and WebDAV with client-side metadata scraping. No extra software needed on your NAS.">不需要。一幕采用纯客户端刮削与直连串流技术，支持直连 SMB 和 WebDAV，NAS 只要开启标准的共享文件夹即可播放，零负担、免运维。</p>
+      </details>
+
+      <details style="margin-bottom: 14px; background: #F8FAFD; border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px;">
+        <summary style="cursor: pointer; font-weight: 700; color: var(--ink);" data-zh="支持哪些操作系统和设备？" data-en="Which platforms are supported?">支持哪些操作系统和设备？</summary>
+        <p style="margin-top: 8px; color: var(--ink-soft); font-size: 14px;" data-zh="一幕支持 macOS (14.0+)、iOS (17.0+) 以及 Apple TV tvOS (17.0+)。三端采用统一核心层，支持局域网媒体源与观看进度同步。" data-en="YiMu supports macOS (14.0+), iOS (17.0+), and Apple TV tvOS (17.0+) with unified core playback architecture.">一幕支持 macOS (14.0+)、iOS (17.0+) 以及 Apple TV tvOS (17.0+)。三端采用统一核心层，支持局域网媒体源与观看进度同步。</p>
+      </details>
+
+      <div style="margin-top: 36px; padding-top: 24px; border-top: 1px dashed var(--border);">
+        <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; color: var(--ink);" data-zh="来自小产品实验室的更多作品" data-en="More from Tiny Product Lab">来自小产品实验室的更多作品</h3>
+        <p style="color: var(--ink-soft); font-size: 14px; margin-bottom: 10px;" data-zh="一幕是由「小产品实验室」精心打造的独立影音工具。您可能还会喜欢：" data-en="YiMu is an indie creation from Tiny Product Lab. You might also like:">一幕是由「小产品实验室」精心打造的独立影音工具。您可能还会喜欢：</p>
+        <ul style="margin: 8px 0 10px 22px; color: var(--ink-soft); font-size: 14px; line-height: 1.8;">
+          <li><a href="https://tinylabpro.com/" target="_blank" style="color: var(--primary); font-weight: 600;">小产品实验室 · 全部工具集</a></li>
+          <li><a href="https://keyscan.tinylabpro.com/" target="_blank" style="color: var(--primary); font-weight: 600;">KeyScan · 本地优先密码保险箱与 TOTP</a></li>
+          <li><a href="https://otp.tinylabpro.com/" target="_blank" style="color: var(--primary); font-weight: 600;">Tiny OTP · 极简两步动态验证码</a></li>
+          <li><a href="https://unmark.tinylabpro.com/" target="_blank" style="color: var(--primary); font-weight: 600;">Unmark · NotebookLM 智能去水印工具</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="wechat">
+        <img src="assets/wechat-qr.jpg" alt="小产品实验室 微信公众号" width="132" height="132" loading="lazy">
+        <span class="wechat-name">微信公众号：小产品实验室</span>
+        <span class="wechat-tip" data-zh="微信扫码关注，获取最新内测安装包与产品进展" data-en="Scan on WeChat to follow for test builds and updates">微信扫码关注，获取最新内测安装包与产品进展</span>
+      </div>
+
+      <div class="links">
+        <a href="https://tinylabpro.com/" target="_blank" data-zh="小产品实验室" data-en="Tiny Product Lab">小产品实验室</a>
+        <a href="about.html" data-zh="关于一幕" data-en="About">关于一幕</a>
+        <a href="privacy.html" data-zh="隐私政策" data-en="Privacy">隐私政策</a>
+        <a href="terms.html" data-zh="使用条款" data-en="Terms">使用条款</a>
+        <a href="mailto:userfeedback@zohomail.com" data-zh="联系支持" data-en="Contact">联系支持</a>
+        <a href="https://github.com/tinyproductlab/yimu-site" target="_blank" data-zh="GitHub 源码" data-en="GitHub">GitHub 源码</a>
+      </div>
+
+      <p class="copy">
+        <span data-zh="© 2026 TinyProductLab (小产品实验室) · 解码内核遵守 LGPL v2.1+ 开源许可" data-en="© 2026 TinyProductLab · Decoding core licensed under LGPL v2.1+">© 2026 TinyProductLab (小产品实验室) · 解码内核遵守 LGPL v2.1+ 开源许可</span>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Coffee modal -->
+  <div class="coffee-modal" id="coffee-modal" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="coffee-modal-content">
+      <button class="coffee-modal-close" type="button" onclick="document.getElementById('coffee-modal').classList.remove('open')" aria-label="关闭">×</button>
+      <h3 data-zh="请创作者喝杯咖啡 ☕️" data-en="Buy the creator a coffee ☕️">请创作者喝杯咖啡 ☕️</h3>
+      <p data-zh="一幕坚持无广告、零上云、纯粹观影。喜欢它的话，欢迎扫码支持项目持续演进。" data-en="YiMu is ad-free and privacy-first. If you love it, your support helps keep it going.">一幕坚持无广告、零上云、纯粹观影。喜欢它的话，欢迎扫码支持项目持续演进。</p>
+      <div class="coffee-modal-codes">
+        <a href="assets/support-wechat.png" target="_blank" rel="noreferrer">
+          <img src="assets/support-wechat.png" alt="微信赞赏码" loading="lazy">
+          <span data-zh="微信赞赏" data-en="WeChat Pay">微信赞赏</span>
+        </a>
+        <a href="assets/support-alipay.png" target="_blank" rel="noreferrer">
+          <img src="assets/support-alipay.png" alt="支付宝赞赏码" loading="lazy">
+          <span data-zh="支付宝赞赏" data-en="Alipay">支付宝赞赏</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var HERO_SHOTS = ["shot-vod.png", "shot-live.png"];
+
+    (function initCarousel() {
+      var slidesEl = document.getElementById("hero-slides");
+      var dotsEl = document.getElementById("hero-dots");
+      if (!slidesEl || !HERO_SHOTS.length) return;
+      var current = 0, timer = null;
+      HERO_SHOTS.forEach(function (name, i) {
+        var img = document.createElement("img");
+        img.src = "assets/" + name;
+        img.alt = "一幕播放器实机界面 " + (i + 1);
+        if (i === 0) img.className = "active";
+        slidesEl.appendChild(img);
+        var dot = document.createElement("button");
+        dot.setAttribute("aria-label", "slide " + (i + 1));
+        if (i === 0) dot.className = "active";
+        dot.onclick = function () { go(i); restart(); };
+        dotsEl.appendChild(dot);
+      });
+      function go(i) {
+        current = i;
+        slidesEl.querySelectorAll("img").forEach(function (im, j) { im.classList.toggle("active", j === i); });
+        dotsEl.querySelectorAll("button").forEach(function (d, j) { d.classList.toggle("active", j === i); });
+      }
+      function restart() {
+        clearInterval(timer);
+        timer = setInterval(function () { go((current + 1) % HERO_SHOTS.length); }, 3800);
+      }
+      restart();
+    })();
+
+    function openCoffee() {
+      var modal = document.getElementById("coffee-modal");
+      if (modal) modal.classList.add("open");
+    }
+
+    var LETTER_ZH = `
+      <p>感谢你关注一幕 YiMu。</p>
+      <p>电影与电视，本应是忙碌生活后最纯粹的休憩与沉浸。然而在今天，无论是移动端还是电视大屏，许多播放软件正变得越来越臃肿——漫长的启动广告、强制要求注册收集手机号、将你的每一次观影记录传上服务器形成用户画像，甚至为了在 Apple TV 上输入一次 NAS 的复杂密码，都要让人筋疲力竭地按几十下遥控器字母。</p>
+      <p>我们认为：<b>一款播放器首先应该尊重你的时间、你的设备，以及你对数据的绝对控制权。</b></p>
+      <blockquote><b>好工具应当像一台精密的机械相机：安静、强韧、可靠，开箱即用。</b></blockquote>
+      <h3>无需注册账号，打开即可播放</h3>
+      <p>一幕不设立任何中央用户服务器，不需要你先注册账号、交出手机号再“获得播放资格”。首次打开应用，直接添加你的 NAS 或导入直播源，一切即可秒级就绪。你的播放进度、片单数据全部存放在系统本地钥匙串与中立 JSON 中，永不上云。</p>
+      <h3>创新跨屏握手，解决电视输入密码痛点</h3>
+      <p>在客厅电视上输入复杂的密码是所有人的噩梦。一幕开创了局域网端对端安全握手：电视端生成动态二维码，手机 Face ID 验证后直接经由局域网 TLS 加密传输，电视收到后直接安全写入本机钥匙串，全程零明文暴露、零第三方中转。</p>
+      <h3>坚守零上云隐私承诺</h3>
+      <p>我们承诺：一幕绝不集成任何第三方统计画像 SDK，不收集观影偏好，核心解码基于公开合规的 LGPL 开源体系构建。你的影音生活，只属于你自己和你的家人。</p>
+      <p>如果你在使用中遇到任何问题，或对新功能有期待，欢迎关注微信公众号「小产品实验室」直接与我们交流。感谢你的信任！</p>
+      <p style="text-align: right; margin-top: 20px;"><b>一幕 YiMu 创作者 · 小产品实验室</b></p>
+    `;
+
+    var LETTER_EN = `
+      <p>Thank you for exploring YiMu Player.</p>
+      <p>Movies and live broadcasts should be pure moments of relaxation. Yet today, many media players are bogged down by startup ads, mandatory registrations, server tracking of every show you watch, and the agonizing process of typing complex NAS passwords on a TV remote.</p>
+      <p>We believe: <b>A media player should respect your time, your device, and your absolute ownership of your personal data.</b></p>
+      <blockquote><b>A great tool is like a precision mechanical camera: quiet, resilient, and ready to capture.</b></blockquote>
+      <h3>No accounts required — stream right away</h3>
+      <p>YiMu has zero centralized user tracking servers. No accounts to create, no phone numbers to surrender. Open the app, connect your NAS or IPTV feed, and enjoy instant playback. Your library, watch history, and passwords are saved strictly in your local device Keychain.</p>
+      <h3>Peer-to-Peer cross-screen password transfer</h3>
+      <p>Typing a 20-character password on an Apple TV remote is terrible. YiMu solves this with dynamic QR handshake: Apple TV generates a one-time token, your iPhone scans with Face ID, and credentials are encrypted directly over your local Wi-Fi into the TV's Keychain.</p>
+      <h3>Absolute zero-cloud privacy promise</h3>
+      <p>We promise: zero third-party tracking SDKs, zero cloud telemetry, and zero ads. Your home theater stays yours.</p>
+      <p>Have questions or suggestions? Follow our WeChat official account or email us anytime. Thank you for your support!</p>
+      <p style="text-align: right; margin-top: 20px;"><b>YiMu Creator · Tiny Product Lab</b></p>
+    `;
+
+    function renderLetter(lang) {
+      var el = document.getElementById("letter-body");
+      if (!el) return;
+      el.innerHTML = (lang === "en") ? LETTER_EN : LETTER_ZH;
+    }
+
+    function applyLang(lang) {
+      lang = (lang === 'en' || lang === 'zh') ? lang : 'zh';
+      document.documentElement.lang = (lang === 'en') ? 'en' : 'zh-Hans';
+      document.title = (lang === 'en') ? 'YiMu — Minimalist Home Theater Streaming Player' : '一幕 YiMu — 极简、优雅的家庭影院串流播放器';
+      document.querySelectorAll('[data-zh][data-en]').forEach(function (el) {
+        el.textContent = el.getAttribute('data-' + lang);
+      });
+      document.getElementById('lang-zh').classList.toggle('active', lang === 'zh');
+      document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+      renderLetter(lang);
+      try { localStorage.setItem('yimu_lang', lang); } catch (e) {}
+    }
+
+    function setLang(lang) { applyLang(lang); }
+
+    (function () {
+      var saved = 'zh';
+      try { saved = localStorage.getItem('yimu_lang') || 'zh'; } catch (e) {}
+      applyLang(saved);
+    })();
+  </script>
+</body>
+</html>

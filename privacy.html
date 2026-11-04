@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一幕 YiMu 播放器 — 隐私政策 (Privacy Policy)</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card-bg: #161b22;
+            --text: #e6edf3;
+            --muted: #8b949e;
+            --accent: #f0883e;
+            --border: #30363d;
+        }
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg: #f6f8fa;
+                --card-bg: #ffffff;
+                --text: #1f2328;
+                --muted: #656d76;
+                --accent: #d97706;
+                --border: #d0d7de;
+            }
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 30px 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 36px 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 26px;
+            margin-top: 0;
+            color: var(--accent);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 12px;
+        }
+        h2 {
+            font-size: 18px;
+            margin-top: 28px;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+        p, li {
+            font-size: 14.5px;
+            color: var(--text);
+        }
+        .meta {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 24px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        .highlight-box {
+            background: rgba(240, 136, 62, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 12px 16px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>一幕 YiMu 播放器 隐私政策</h1>
+    <div class="meta">
+        生效日期：2026年11月1日 · 最后更新：2026年11月4日 · 开发者：Tinylab Pro
+    </div>
+
+    <div class="highlight-box">
+        <strong>我们的核心安全承诺：</strong>一幕是一款跨平台多媒体播放工具，坚守“纯本地自治、密码绝不上云、零隐私追踪”准则。您的所有影视、字幕与凭据均在本地安全运行。
+    </div>
+
+    <h2>一、我们收集与处理的信息</h2>
+    <ul>
+        <li><strong>本地媒体与播放进度</strong>：您播放的视频、音频与字幕仅在设备本地解码播放，绝不上传至任何服务器。历史记录保存在本地 <code>library.json</code>。</li>
+        <li><strong>NAS 凭据与密码安全</strong>：配置的 SMB / WebDAV / DLNA 密码直接存入 Apple 系统内置钥匙串（Keychain），关闭云同步（<code>kSecAttrSynchronizable = false</code>），绝不落入纯文本、日志或二维码。</li>
+        <li><strong>网络电视频道 (IPTV)</strong>：用户自行订阅的 M3U / M3U8 流媒体地址仅由本机直接向源服务器请求播放，不经由开发者服务器中转或统计。</li>
+        <li><strong>零第三方分析与追踪</strong>：本应用未集成任何第三方广告 SDK、用户行为打点或商业追踪器。</li>
+    </ul>
+
+    <h2>二、系统权限使用目的</h2>
+    <ul>
+        <li><strong>本地网络 (Local Network)</strong>：用于局域网内发现与访问 NAS 共享存储，以及在 Mac、iPhone、Apple TV 之间点对点二维码加密互传。</li>
+        <li><strong>相机 (Camera - 仅限 iOS)</strong>：仅用于快速扫描目标屏幕上的配对二维码，即扫即用，不录像、不存储任何图像。</li>
+        <li><strong>文件访问 (Files & Folders)</strong>：仅读取您主动授权打开的本地媒体文件及字幕。</li>
+    </ul>
+
+    <h2>三、第三方服务说明</h2>
+    <ul>
+        <li><strong>TMDB 影视刮削</strong>：若开启 TMDB 匹配，仅使用片名关键词向 The Movie Database 查询公开影视海报与简介，不携带任何个人身份标识。</li>
+        <li><strong>开源多媒体内核</strong>：采用符合 LGPL v2.1+ 开源许可的 libmpv 动态链接内核。</li>
+    </ul>
+
+    <h2>四、数据删除与留存</h2>
+    <p>所有数据完整保存在用户个人设备中。您可在应用设置中一键清空媒体库数据，或删除应用，相关数据与钥匙串项将随之从设备中彻底抹除。</p>
+
+    <h2>五、联系我们</h2>
+    <p>如有任何隐私保护或技术支持疑问，欢迎随时联系：<br>
+    支持邮箱：<a href="mailto:userfeedback@zohomail.com">userfeedback@zohomail.com</a><br>
+    微信公众号反馈：<strong>小产品实验室</strong><br>
+    官方网站：<a href="https://ym.tinylabpro.com" target="_blank">https://ym.tinylabpro.com</a></p>
+</div>
+</body>
+</html>
