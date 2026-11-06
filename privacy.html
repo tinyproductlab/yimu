@@ -10,8 +10,9 @@
             --card-bg: #161b22;
             --text: #e6edf3;
             --muted: #8b949e;
-            --accent: #f0883e;
+            --accent: #58a6ff;
             --border: #30363d;
+            --tag-bg: rgba(88, 166, 255, 0.12);
         }
         @media (prefers-color-scheme: light) {
             :root {
@@ -19,20 +20,21 @@
                 --card-bg: #ffffff;
                 --text: #1f2328;
                 --muted: #656d76;
-                --accent: #d97706;
+                --accent: #0969da;
                 --border: #d0d7de;
+                --tag-bg: rgba(9, 105, 218, 0.08);
             }
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg);
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.65;
             margin: 0;
             padding: 30px 20px;
         }
         .container {
-            max-width: 800px;
+            max-width: 820px;
             margin: 0 auto;
             background-color: var(--card-bg);
             border: 1px solid var(--border);
@@ -40,27 +42,75 @@
             padding: 36px 40px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
-        h1 {
-            font-size: 26px;
-            margin-top: 0;
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 14px;
+        }
+        .brand-link {
+            font-size: 14px;
             color: var(--accent);
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 12px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            background: var(--tag-bg);
+            padding: 4px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        .lang-btn {
+            border: none;
+            background: transparent;
+            color: var(--text);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lang-btn.active {
+            background: var(--accent);
+            color: #fff;
+        }
+        h1 {
+            font-size: 24px;
+            margin-top: 0;
+            color: var(--text);
+            padding-bottom: 8px;
         }
         h2 {
-            font-size: 18px;
+            font-size: 17px;
             margin-top: 28px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             color: var(--text);
+            border-left: 3px solid var(--accent);
+            padding-left: 10px;
         }
         p, li {
-            font-size: 14.5px;
+            font-size: 14px;
             color: var(--text);
         }
-        .meta {
-            color: var(--muted);
+        .meta-box {
+            background: var(--tag-bg);
+            border: 1px solid var(--border);
+            padding: 12px 16px;
+            border-radius: 8px;
             font-size: 13px;
+            color: var(--muted);
             margin-bottom: 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 8px;
+        }
+        .meta-box strong {
+            color: var(--text);
         }
         ul {
             padding-left: 20px;
@@ -69,7 +119,7 @@
             margin-bottom: 6px;
         }
         .highlight-box {
-            background: rgba(240, 136, 62, 0.1);
+            background: rgba(88, 166, 255, 0.08);
             border-left: 4px solid var(--accent);
             padding: 12px 16px;
             margin: 20px 0;
@@ -83,48 +133,143 @@
         a:hover {
             text-decoration: underline;
         }
+        .lang-section {
+            display: none;
+        }
+        .lang-section.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>一幕 YiMu 播放器 隐私政策</h1>
-    <div class="meta">
-        生效日期：2026年11月1日 · 最后更新：2026年11月4日 · 开发者：Tinylab Pro
+    <div class="top-nav">
+        <a class="brand-link" href="/">← 一幕 YiMu 官网</a>
+        <div class="lang-switch">
+            <button class="lang-btn active" id="btnZh" onclick="setLang('zh')">中文 (简体)</button>
+            <button class="lang-btn" id="btnEn" onclick="setLang('en')">English</button>
+        </div>
     </div>
 
-    <div class="highlight-box">
-        <strong>我们的核心安全承诺：</strong>一幕是一款跨平台多媒体播放工具，坚守“纯本地自治、密码绝不上云、零隐私追踪”准则。您的所有影视、字幕与凭据均在本地安全运行。
+    <!-- 中文版 -->
+    <div id="sectionZh" class="lang-section active">
+        <h1>一幕 YiMu 播放器 隐私政策</h1>
+        <div class="meta-box">
+            <div><strong>开发者：</strong>小产品实验室</div>
+            <div><strong>微信公众号：</strong>小产品实验室</div>
+            <div><strong>生效日期：</strong>2026年11月1日</div>
+            <div><strong>最后更新：</strong>2026年11月5日</div>
+        </div>
+
+        <div class="highlight-box">
+            <strong>核心安全承诺：</strong>一幕（YiMu）是一款跨平台纯粹播放工具，我们坚守“零第三方统计、视频不上云、密码仅入本机钥匙串”准则。您的所有影视、字幕与私有凭据均在本地自治运行。
+        </div>
+
+        <h2>一、我们收集与处理的信息</h2>
+        <ul>
+            <li><strong>媒体文件与播放进度：</strong>完全在设备本地解码与存储（~/Library/Application Support/YiMu/library.json），绝不上传至任何服务器。</li>
+            <li><strong>NAS 与网盘凭据：</strong>密码使用 Apple 原生安全钥匙串（Keychain）存储，配置 kSecAttrSynchronizable = false 杜绝云端同步，日志与二维码中绝无明文。</li>
+            <li><strong>网络电视直播 (IPTV)：</strong>用户添加的 M3U / TXT 源仅在本地与流媒体服务器直接通信，开发团队不中转、不记录收视喜好。</li>
+            <li><strong>零第三方 SDK：</strong>本应用未集成任何第三方广告、追踪或行为统计 SDK，不采集设备广告标识符（IDFA）。</li>
+        </ul>
+
+        <h2>二、系统权限使用说明</h2>
+        <ul>
+            <li><strong>本地网络权限：</strong>用于扫描局域网 NAS (SMB/WebDAV) 及多端设备间进行点对点安全配对互传。</li>
+            <li><strong>文件与目录访问：</strong>仅用于读取您主动选择并授权打开的本地媒体文件与字幕文件。</li>
+            <li><strong>相机权限 (iOS 端)：</strong>仅用于离线扫描配对二维码以完成局域网互传握手，不录制、不上传任何画面。</li>
+        </ul>
+
+        <h2>三、第三方服务检索</h2>
+        <ul>
+            <li><strong>TMDB 影视刮削：</strong>若启用刮削，应用仅使用本地文件名向 The Movie Database 发起查询获取海报与简介，不附带任何个人身份信息。</li>
+            <li><strong>开源解码内核：</strong>底层基于 LGPL v2.1+ 开源构建，完全合规开源，不含任何后门。</li>
+        </ul>
+
+        <h2>四、数据删除与管理</h2>
+        <p>所有数据完全由您掌控。您可以在应用设置中一键清空媒体库数据，卸载应用后所有沙盒数据及钥匙串密码将被系统彻底抹除。</p>
+
+        <h2>五、开发者与联系支持</h2>
+        <p>如有任何疑问，欢迎通过以下渠道与开发者沟通：</p>
+        <ul>
+            <li><strong>开发者团队：</strong>小产品实验室</li>
+            <li><strong>官方微信公众号：</strong>小产品实验室</li>
+            <li><strong>支持邮箱：</strong><a href="mailto:userfeedback@zohomail.com">userfeedback@zohomail.com</a></li>
+            <li><strong>官方网站：</strong><a href="https://ym.tinylabpro.com">https://ym.tinylabpro.com</a></li>
+        </ul>
     </div>
 
-    <h2>一、我们收集与处理的信息</h2>
-    <ul>
-        <li><strong>本地媒体与播放进度</strong>：您播放的视频、音频与字幕仅在设备本地解码播放，绝不上传至任何服务器。历史记录保存在本地 <code>library.json</code>。</li>
-        <li><strong>NAS 凭据与密码安全</strong>：配置的 SMB / WebDAV / DLNA 密码直接存入 Apple 系统内置钥匙串（Keychain），关闭云同步（<code>kSecAttrSynchronizable = false</code>），绝不落入纯文本、日志或二维码。</li>
-        <li><strong>网络电视频道 (IPTV)</strong>：用户自行订阅的 M3U / M3U8 流媒体地址仅由本机直接向源服务器请求播放，不经由开发者服务器中转或统计。</li>
-        <li><strong>零第三方分析与追踪</strong>：本应用未集成任何第三方广告 SDK、用户行为打点或商业追踪器。</li>
-    </ul>
+    <!-- English Version -->
+    <div id="sectionEn" class="lang-section">
+        <h1>YiMu Player Privacy Policy</h1>
+        <div class="meta-box">
+            <div><strong>Developer:</strong> Tinylab (小产品实验室)</div>
+            <div><strong>WeChat Official:</strong> 小产品实验室</div>
+            <div><strong>Effective Date:</strong> November 1, 2026</div>
+            <div><strong>Last Updated:</strong> November 5, 2026</div>
+        </div>
 
-    <h2>二、系统权限使用目的</h2>
-    <ul>
-        <li><strong>本地网络 (Local Network)</strong>：用于局域网内发现与访问 NAS 共享存储，以及在 Mac、iPhone、Apple TV 之间点对点二维码加密互传。</li>
-        <li><strong>相机 (Camera - 仅限 iOS)</strong>：仅用于快速扫描目标屏幕上的配对二维码，即扫即用，不录像、不存储任何图像。</li>
-        <li><strong>文件访问 (Files & Folders)</strong>：仅读取您主动授权打开的本地媒体文件及字幕。</li>
-    </ul>
+        <div class="highlight-box">
+            <strong>Core Privacy Commitment:</strong> YiMu is a native, privacy-first multimedia player. We adhere to the highest security principles: zero third-party tracking, no video upload to cloud, and credentials strictly stored in Apple Keychain.
+        </div>
 
-    <h2>三、第三方服务说明</h2>
-    <ul>
-        <li><strong>TMDB 影视刮削</strong>：若开启 TMDB 匹配，仅使用片名关键词向 The Movie Database 查询公开影视海报与简介，不携带任何个人身份标识。</li>
-        <li><strong>开源多媒体内核</strong>：采用符合 LGPL v2.1+ 开源许可的 libmpv 动态链接内核。</li>
-    </ul>
+        <h2>1. Information We Collect and Process</h2>
+        <ul>
+            <li><strong>Media Files & Playback Progress:</strong> Processed entirely locally (e.g. ~/Library/Application Support/YiMu/library.json). Your media files, titles, and playback history never leave your device.</li>
+            <li><strong>NAS & Storage Credentials:</strong> Passwords are secured directly via Apple Keychain with <code>kSecAttrSynchronizable = false</code>, preventing sync or leakage. No plaintext passwords exist in logs or QR codes.</li>
+            <li><strong>Live TV (IPTV):</strong> M3U/TXT streams connect directly between your device and streaming servers. We do not proxy, collect, or track your viewing habits.</li>
+            <li><strong>Zero Third-Party SDKs:</strong> YiMu contains no third-party analytics, behavioral trackers, or advertising SDKs. We do not collect IDFA.</li>
+        </ul>
 
-    <h2>四、数据删除与留存</h2>
-    <p>所有数据完整保存在用户个人设备中。您可在应用设置中一键清空媒体库数据，或删除应用，相关数据与钥匙串项将随之从设备中彻底抹除。</p>
+        <h2>2. System Permissions</h2>
+        <ul>
+            <li><strong>Local Network:</strong> Used to discover LAN NAS devices (SMB/WebDAV) and perform peer-to-peer device pairing via LAN HTTPS.</li>
+            <li><strong>Files & Folders:</strong> Used strictly to read and play user-selected video and subtitle files.</li>
+            <li><strong>Camera (iOS only):</strong> Used solely to scan device pairing QR codes locally for instant handshake; no photos or video streams are retained.</li>
+        </ul>
 
-    <h2>五、联系我们</h2>
-    <p>如有任何隐私保护或技术支持疑问，欢迎随时联系：<br>
-    支持邮箱：<a href="mailto:userfeedback@zohomail.com">userfeedback@zohomail.com</a><br>
-    微信公众号反馈：<strong>小产品实验室</strong><br>
-    官方网站：<a href="https://ym.tinylabpro.com" target="_blank">https://ym.tinylabpro.com</a></p>
+        <h2>3. Third-Party Integrations</h2>
+        <ul>
+            <li><strong>TMDB Metadata Scraper:</strong> When enabled, only file keywords are queried against The Movie Database API to fetch posters and synopsis, without personal identifiers.</li>
+            <li><strong>Open Source Core:</strong> Built on libmpv under LGPL v2.1+, transparent and compliant.</li>
+        </ul>
+
+        <h2>4. Data Retention & Deletion</h2>
+        <p>All data remains on your physical device. You can purge your media database anytime in Settings, or uninstall the app to instantly delete all local cache and Keychain credentials.</p>
+
+        <h2>5. Developer & Contact Support</h2>
+        <p>For questions or feedback, feel free to reach out:</p>
+        <ul>
+            <li><strong>Developer:</strong> Tinylab (小产品实验室)</li>
+            <li><strong>WeChat Official Account:</strong> 小产品实验室</li>
+            <li><strong>Support Email:</strong> <a href="mailto:userfeedback@zohomail.com">userfeedback@zohomail.com</a></li>
+            <li><strong>Official Website:</strong> <a href="https://ym.tinylabpro.com">https://ym.tinylabpro.com</a></li>
+        </ul>
+    </div>
 </div>
+
+<script>
+function setLang(lang) {
+    var btnZh = document.getElementById('btnZh');
+    var btnEn = document.getElementById('btnEn');
+    var secZh = document.getElementById('sectionZh');
+    var secEn = document.getElementById('sectionEn');
+    if (lang === 'en') {
+        btnEn.classList.add('active');
+        btnZh.classList.remove('active');
+        secEn.classList.add('active');
+        secZh.classList.remove('active');
+    } else {
+        btnZh.classList.add('active');
+        btnEn.classList.remove('active');
+        secZh.classList.add('active');
+        secEn.classList.remove('active');
+    }
+}
+// Detect user preferred language
+if (navigator.language && navigator.language.toLowerCase().startsWith('en')) {
+    setLang('en');
+}
+</script>
 </body>
 </html>

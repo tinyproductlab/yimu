@@ -3,45 +3,150 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>一幕 YiMu — 用户使用条款</title>
+<title>一幕 YiMu — 开发者与使用许可协议 (Developer Terms of Service)</title>
 <link rel="icon" href="assets/icon.png" sizes="32x32">
 <style>
-  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Segoe UI","Microsoft YaHei",sans-serif;max-width:720px;margin:0 auto;padding:24px 16px;color:#1a1a1a;line-height:1.7;background:#fff}
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --muted: #666666;
+    --accent: #0071E3;
+    --border: #e5e5e5;
+    --card-bg: #f8f9fa;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --border: #30363d;
+      --card-bg: #161b22;
+    }
+  }
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Segoe UI","Microsoft YaHei",sans-serif;max-width:800px;margin:0 auto;padding:32px 20px;color:var(--text);line-height:1.7;background:var(--bg)}
+  .top-nav {display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;border-bottom:1px solid var(--border);padding-bottom:14px;}
+  .brand{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;}
+  .lang-switch {display:flex;gap:6px;background:rgba(0,113,227,0.08);padding:4px;border-radius:8px;border:1px solid var(--border);}
+  .lang-btn {border:none;background:transparent;color:var(--text);padding:4px 12px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s;}
+  .lang-btn.active {background:var(--accent);color:#fff;}
   h1{font-size:24px;margin-bottom:8px}
-  h2{font-size:18px;margin-top:28px;margin-bottom:8px}
-  p{margin:10px 0;color:#444}
-  a{color:#0071E3;text-decoration:none}
+  h2{font-size:17px;margin-top:28px;margin-bottom:10px;border-left:3px solid var(--accent);padding-left:10px;}
+  p{margin:10px 0;color:var(--text)}
+  a{color:var(--accent);text-decoration:none}
   a:hover{text-decoration:underline}
-  .brand{display:inline-block;margin-bottom:24px;font-size:14px;color:#666}
-  ul{padding-left:20px;color:#444}
+  ul{padding-left:20px;color:var(--text)}
   li{margin:6px 0}
+  .meta-box {background:var(--card-bg);border:1px solid var(--border);padding:14px 18px;border-radius:8px;font-size:13px;color:var(--muted);margin-bottom:24px;display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:8px;}
+  .meta-box strong {color:var(--text);}
+  .lang-section {display:none;}
+  .lang-section.active {display:block;}
 </style>
 </head>
 <body>
-<a class="brand" href="/">← 一幕 YiMu 官网</a>
+<div class="top-nav">
+  <a class="brand" href="/">← 一幕 YiMu 官网</a>
+  <div class="lang-switch">
+    <button class="lang-btn active" id="btnZh" onclick="setLang('zh')">中文 (简体)</button>
+    <button class="lang-btn" id="btnEn" onclick="setLang('en')">English</button>
+  </div>
+</div>
 
-<h1>使用条款 (Terms of Service)</h1>
-<p>最后更新：2026 年 11 月 4 日</p>
+<!-- 中文版 -->
+<div id="sectionZh" class="lang-section active">
+  <h1>开发者与用户许可协议 (Terms of Service)</h1>
+  <div class="meta-box">
+    <div><strong>开发者主体：</strong>小产品实验室</div>
+    <div><strong>微信公众号：</strong>小产品实验室</div>
+    <div><strong>适用软件：</strong>一幕 YiMu 播放器 (macOS / iOS / tvOS)</div>
+    <div><strong>最后更新：</strong>2026 年 11 月 5 日</div>
+  </div>
 
-<h2>一、服务说明</h2>
-<p>「一幕 YiMu」是一款面向 Mac、iOS 及 Apple TV 的本地家庭影音串流播放工具，提供本地视频播放、局域网 NAS (SMB / WebDAV) 串流、电视直播与影视订阅源聚合、客户端海报墙呈现及端侧字幕增强等功能。</p>
+  <h2>一、服务与软件定位</h2>
+  <p>「一幕 YiMu」是由「小产品实验室」独立设计与研发的跨平台多媒体播放与串流工具。为用户提供本地视频解码、局域网私有 NAS (SMB / WebDAV) 流畅串流、影视订阅源聚合管理、客户端海报墙呈现及端侧字幕增强等功能。</p>
 
-<h2>二、数据与账户免除</h2>
-<p>一幕坚持「零上云、无账号、本地钥匙串保存」的设计原则。应用不设立中央服务器保存您的播放历史或账号密码，所有媒体文件与网络凭据均保留在您的个人设备或私有局域网内。</p>
+  <h2>二、用户隐私与数据自治准则</h2>
+  <p>本团队坚决执行「零数据采集、无云端账号体系、密钥仅进本机钥匙串」的开发原则。应用不设收集用户播放偏好或密码的云端服务器，所有媒体文件与网络凭据均保留在您的个人硬件沙盒或私有网络内。</p>
 
-<h2>三、使用规范</h2>
-<ul>
-  <li>您应当合法合规地使用本应用，不得利用本工具播放侵权、违法或违规内容。</li>
-  <li>本应用提供的预设源仅用于流媒体协议测试与演示，您导入的第三方直播源 (M3U / TXT) 与 NAS 内容之版权由原提供方负责。</li>
-  <li>您对个人设备安全、局域网访问授权及密码保管自行承担完整责任。</li>
-  <li>遵守开源许可证协议：底层媒体解码内核基于 LGPL v2.1+ 开源构建。</li>
-</ul>
+  <h2>三、合规使用与权利义务规范</h2>
+  <ul>
+    <li><strong>合规播放：</strong>用户须在法律法规允许的范围内使用本工具，不得利用本工具制作、复制、传播或播放侵犯他人著作权、商标权等合法权益的违法音视频内容。</li>
+    <li><strong>第三方源声明：</strong>本软件自带的演示内容仅用于流媒体协议测试。用户自行导入的第三方订阅源 (M3U / TXT) 与 NAS 内容之版权与合法性由提供方及用户自行负责。</li>
+    <li><strong>设备与凭证保管：</strong>用户应妥善保管个人设备、局域网访问权限及钥匙串密码。因个人保管不当或设备越狱导致的风险由使用者承担。</li>
+    <li><strong>开源合规许可：</strong>本软件底层媒体解码内核基于 LGPL v2.1+ 动态链接库构建，遵循开源社区合规要求。</li>
+  </ul>
 
-<h2>四、免责声明</h2>
-<p>由于局域网环境、Wi-Fi 波动、路由器配置及第三方网络流媒体服务的不确定性，一幕无法对第三方流媒体的持续可用性做出绝对保证。但在合理技术范围内，我们将持续保障客户端播放引擎的稳定与高性能。</p>
+  <h2>四、有限担保与免责声明</h2>
+  <p>鉴于局域网物理环境、Wi-Fi 吞吐抖动、家庭路由器配置及第三方流媒体源服务稳定性的客观差异，开发者无法对特定第三方在线流媒体的持续可用性作绝对商业担保。小产品实验室将尽最大技术努力持续保障播放核心的高性能与稳定性。</p>
 
-<h2>五、联系支持</h2>
-<p>如有任何疑问，欢迎联系：<a href="mailto:userfeedback@zohomail.com">userfeedback@zohomail.com</a> 或关注微信公众号「小产品实验室」。</p>
+  <h2>五、开发者联络与技术支持</h2>
+  <p>如对本开发协议或产品功能有任何建议或咨询，欢迎与开发者建立联系：</p>
+  <ul>
+    <li><strong>开发者：</strong>小产品实验室</li>
+    <li><strong>微信公众号：</strong>小产品实验室</li>
+    <li><strong>技术支持邮箱：</strong><a href="mailto:userfeedback@zohomail.com">userfeedback@zohomail.com</a></li>
+    <li><strong>官方主页：</strong><a href="https://ym.tinylabpro.com">https://ym.tinylabpro.com</a></li>
+  </ul>
+</div>
 
+<!-- English Version -->
+<div id="sectionEn" class="lang-section">
+  <h1>Developer & User License Agreement (Terms of Service)</h1>
+  <div class="meta-box">
+    <div><strong>Developer:</strong> Tinylab (小产品实验室)</div>
+    <div><strong>WeChat Official:</strong> 小产品实验室</div>
+    <div><strong>Applicable App:</strong> YiMu Player (macOS / iOS / tvOS)</div>
+    <div><strong>Last Updated:</strong> November 5, 2026</div>
+  </div>
+
+  <h2>1. Service Scope and Product Nature</h2>
+  <p>"YiMu" is an independent native playback tool engineered by "Tinylab", delivering high-performance local video playback, LAN NAS (SMB / WebDAV) streaming, media subscription management, client-side poster scrapers, and on-device subtitle rendering.</p>
+
+  <h2>2. Privacy & Data Autonomy Principles</h2>
+  <p>Tinylab strictly upholds a "Zero-Cloud Tracking, No Account Hassle, Keychain-Encrypted" philosophy. We do not host central servers to gather your playback records, titles, or secrets. All media files and network credentials remain entirely within your private environment.</p>
+
+  <h2>3. Terms of Use & Legal Compliance</h2>
+  <ul>
+    <li><strong>Lawful Use:</strong> You agree to use YiMu in compliance with all applicable laws and regulations. You shall not utilize the app to distribute, broadcast, or infringe upon copyrighted materials without proper authorization.</li>
+    <li><strong>Third-Party Sources:</strong> Preset channels provided within the app are strictly for protocol evaluation. Tinylab does not provide streaming content; the copyright and legality of user-imported M3U/TXT streams or NAS archives belong solely to their respective distributors.</li>
+    <li><strong>Device & Credential Security:</strong> You are responsible for safeguarding your personal device, Wi-Fi security, and Keychain access.</li>
+    <li><strong>Open Source Compliance:</strong> The media engine is dynamically linked with libmpv under LGPL v2.1+, complying fully with open source standards.</li>
+  </ul>
+
+  <h2>4. Disclaimer of Warranties</h2>
+  <p>Due to environmental variables including local Wi-Fi fluctuations, router configurations, and third-party IPTV uptime, YiMu provides software on an "as-is" basis without warranties of uninterrupted online streaming. Tinylab continuously strives to ensure top-tier engine stability and responsiveness.</p>
+
+  <h2>5. Developer Contact & Support</h2>
+  <p>For questions or licensing inquiries, feel free to reach out:</p>
+  <ul>
+    <li><strong>Developer:</strong> Tinylab (小产品实验室)</li>
+    <li><strong>WeChat Official:</strong> 小产品实验室</li>
+    <li><strong>Support Email:</strong> <a href="mailto:userfeedback@zohomail.com">userfeedback@zohomail.com</a></li>
+    <li><strong>Official Website:</strong> <a href="https://ym.tinylabpro.com">https://ym.tinylabpro.com</a></li>
+  </ul>
+</div>
+
+<script>
+function setLang(lang) {
+  var btnZh = document.getElementById('btnZh');
+  var btnEn = document.getElementById('btnEn');
+  var secZh = document.getElementById('sectionZh');
+  var secEn = document.getElementById('sectionEn');
+  if (lang === 'en') {
+    btnEn.classList.add('active');
+    btnZh.classList.remove('active');
+    secEn.classList.add('active');
+    secZh.classList.remove('active');
+  } else {
+    btnZh.classList.add('active');
+    btnEn.classList.remove('active');
+    secZh.classList.add('active');
+    secEn.classList.remove('active');
+  }
+}
+if (navigator.language && navigator.language.toLowerCase().startsWith('en')) {
+  setLang('en');
+}
+</script>
 </body>
 </html>
