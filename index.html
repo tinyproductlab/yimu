@@ -728,7 +728,43 @@
       <a href="#appletv-china" data-zh="Apple TV 中国区说明" data-en="Apple TV FAQ">Apple TV 中国区说明</a>
       <a href="https://tinylabpro.com/" target="_blank" data-zh="小产品实验室" data-en="TinyLab">小产品实验室</a>
     </nav>
-    <div class="nav-actions">
+        <div class="nav-actions">
+      <!-- 极简光律时间胶囊与悬停浮层 -->
+      <div class="chrono-pill-wrap">
+        <div class="chrono-pill" id="timeBadge">
+          <span class="theme-dot" style="background: var(--primary);"></span>
+          <span id="timePeriodName">🌙 深夜放映</span>
+        </div>
+        <!-- 鼠标悬停时优雅浮出的光律卡片 -->
+        <div class="chrono-popover">
+          <div class="chrono-popover-header">
+            <span id="popoverIcon">🌙</span>
+            <span id="popoverTitle">深夜放映 · 好莱坞暗夜</span>
+          </div>
+          <div class="chrono-popover-desc" id="popoverDesc">
+            关灯沉浸的私人影院<br>
+            <span style="opacity: 0.75; font-size: 11px;">界面色调随你所在时区晨昏日落自动流转</span>
+          </div>
+          <div class="chrono-schedule">
+            <div class="chrono-row" id="row-aurora">
+              <span>🌅 06:00 - 11:00</span>
+              <span>晨曦淡彩极光</span>
+            </div>
+            <div class="chrono-row" id="row-apple">
+              <span>☀️ 11:00 - 17:00</span>
+              <span>苹果纯净通透白</span>
+            </div>
+            <div class="chrono-row" id="row-warm">
+              <span>🛋️ 17:00 - 21:00</span>
+              <span>北欧暖阳燕麦米白</span>
+            </div>
+            <div class="chrono-row" id="row-cinema">
+              <span>🌙 21:00 - 06:00</span>
+              <span>好莱坞暗夜放映厅</span>
+            </div>
+          </div>
+        </div>
+      </div>
       <a href="guide.html" class="nav-guide-btn" data-zh="📖 订阅与使用教程" data-en="📖 Guide & Tutorials">📖 订阅与使用教程</a>
       <button class="btn-coffee" id="coffeeBtn" data-zh="♡ 赞赏" data-en="♡ Donate">♡ 赞赏</button>
       <div class="lang-switch">
