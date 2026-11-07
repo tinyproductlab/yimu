@@ -634,26 +634,87 @@
     z-index: 30;
   }
 
+
+  /* 导航栏光律自适应胶囊与悬停浮层 (Chrono Hover Popover) */
+  .chrono-pill-wrap {
+    position: relative;
+    display: inline-block;
+  }
+  .chrono-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--badge-bg);
+    border: 1px solid var(--badge-border);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary);
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+  }
+  .chrono-pill:hover {
+    background: var(--primary);
+    color: var(--btn-primary-text);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  }
+  .chrono-popover {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 310px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 16px 18px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    z-index: 500;
+    pointer-events: none;
+    text-align: left;
+  }
+  .chrono-pill-wrap:hover .chrono-popover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .chrono-popover-header {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 14px; font-weight: 700; color: var(--text);
+    margin-bottom: 6px;
+  }
+  .chrono-popover-desc {
+    font-size: 12px; color: var(--text-sub); line-height: 1.5;
+    margin-bottom: 12px; padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .chrono-schedule {
+    display: flex; flex-direction: column; gap: 6px;
+    font-size: 11px;
+  }
+  .chrono-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 4px 8px; border-radius: 6px;
+    color: var(--text-sub);
+  }
+  .chrono-row.current-active {
+    background: var(--badge-bg);
+    color: var(--primary);
+    font-weight: 700;
+  }
+
 </style>
 </head>
 <body>
-
-<!-- 自然节律时间自适应光影提示条 -->
-<div class="palette-bar">
-  <div class="container palette-inner">
-    <div class="palette-title" id="timeGreeting">
-      <span id="timeIcon">☀️</span>
-      <span id="timeText" style="font-weight: 600;">自然光律时钟加载中...</span>
-      <span style="opacity: 0.65; font-size: 11px;">（界面色调随你所在时区晨昏日落自动流转）</span>
-    </div>
-    <div class="palette-options">
-      <div id="timeBadge" style="display: inline-flex; align-items: center; gap: 6px; padding: 3px 12px; border-radius: 999px; background: var(--badge-bg); border: 1px solid var(--badge-border); font-size: 11px; font-weight: 600; color: var(--primary);">
-        <span class="theme-dot" style="background: var(--primary);"></span>
-        <span id="timePeriodName">正在同步</span>
-      </div>
-    </div>
-  </div>
-</div>
 
 <header>
   <div class="container nav-bar">
@@ -962,10 +1023,10 @@
 <script>
   // 自然节律时间光影引擎 (Chrono-Adaptive Theme Engine)
   const TIME_SLOTS = [
-    { start: 6,  end: 11, theme: "aurora-light", icon: "🌅", name: "晨曦时分", desc: "晨曦微光 · 清爽冰蓝与朝阳微彩" },
-    { start: 11, end: 17, theme: "apple-light",  icon: "☀️", name: "明亮白昼", desc: "苹果纯净白 · 极简通透与清晰阅读" },
-    { start: 17, end: 21, theme: "warm-cream",   icon: "🛋️", name: "黄昏归家", desc: "北欧暖燕麦 · 客厅沙发的温馨惬意" },
-    { start: 21, end: 6,  theme: "cinema-dark",  icon: "🌙", name: "深夜放映", desc: "好莱坞暗夜 · 关灯沉浸的私人影院" }
+    { key: "aurora", start: 6,  end: 11, theme: "aurora-light", icon: "🌅", name: "晨曦时分", desc: "晨曦微光 · 清爽冰蓝与朝阳微彩" },
+    { key: "apple",  start: 11, end: 17, theme: "apple-light",  icon: "☀️", name: "明亮白昼", desc: "苹果纯净白 · 极简通透与清晰阅读" },
+    { key: "warm",   start: 17, end: 21, theme: "warm-cream",   icon: "🛋️", name: "黄昏归家", desc: "北欧暖燕麦 · 客厅沙发的温馨惬意" },
+    { key: "cinema", start: 21, end: 6,  theme: "cinema-dark",  icon: "🌙", name: "深夜放映", desc: "好莱坞暗夜 · 关灯沉浸的私人影院" }
   ];
 
   function getAutoSlot() {
@@ -983,16 +1044,29 @@
     const now = new Date();
     const timeStr = String(now.getHours()).padStart(2, "0") + ":" + String(now.getMinutes()).padStart(2, "0");
 
-    const iconEl = document.getElementById("timeIcon");
-    const textEl = document.getElementById("timeText");
     const periodEl = document.getElementById("timePeriodName");
+    const popTitle = document.getElementById("popoverTitle");
+    const popDesc = document.getElementById("popoverDesc");
+    const popIcon = document.getElementById("popoverIcon");
 
-    if (iconEl) iconEl.textContent = slot.icon;
-    if (textEl) textEl.textContent = slot.name + " (" + timeStr + ") · " + slot.desc;
-    if (periodEl) periodEl.textContent = slot.icon + " " + slot.name;
+    if (periodEl) periodEl.textContent = slot.icon + " " + slot.name + " (" + timeStr + ")";
+    if (popTitle) popTitle.textContent = slot.name + " · " + (slot.key === "cinema" ? "好莱坞暗夜" : (slot.key === "warm" ? "暖阳燕麦" : (slot.key === "aurora" ? "晨曦淡彩" : "纯净白")));
+    if (popDesc) popDesc.innerHTML = slot.desc + "<br><span style='opacity: 0.75; font-size: 11px;'>当前 " + timeStr + " · 界面色调随你所在时区晨昏日落自动流转</span>";
+    if (popIcon) popIcon.textContent = slot.icon;
+
+    // Highlight current active row in popover
+    ["aurora", "apple", "warm", "cinema"].forEach(k => {
+      const el = document.getElementById("row-" + k);
+      if (el) {
+        if (k === slot.key) {
+          el.className = "chrono-row current-active";
+        } else {
+          el.className = "chrono-row";
+        }
+      }
+    });
   }
 
-  // 初始化执行并每分钟自动校准
   applyChronoTheme();
   setInterval(applyChronoTheme, 60000);
 
