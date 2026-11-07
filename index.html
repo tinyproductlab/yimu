@@ -638,26 +638,19 @@
 </head>
 <body>
 
-<!-- 调色板即时切换栏 -->
+<!-- 自然节律时间自适应光影提示条 -->
 <div class="palette-bar">
   <div class="container palette-inner">
-    <div class="palette-title">
-      <span>🎨 视觉背景调色板：</span>
-      <span style="opacity: 0.7;">（点击即可切换白底、米白、极光与暗夜模式）</span>
+    <div class="palette-title" id="timeGreeting">
+      <span id="timeIcon">☀️</span>
+      <span id="timeText" style="font-weight: 600;">自然光律时钟加载中...</span>
+      <span style="opacity: 0.65; font-size: 11px;">（界面色调随你所在时区晨昏日落自动流转）</span>
     </div>
     <div class="palette-options">
-      <button class="theme-btn active" data-t="apple-light" onclick="setTheme('apple-light')">
-        <span class="theme-dot" style="background: #0071E3;"></span> ☀️ 苹果纯净白
-      </button>
-      <button class="theme-btn" data-t="warm-cream" onclick="setTheme('warm-cream')">
-        <span class="theme-dot" style="background: #C57D25;"></span> 🛋️ 北欧暖燕麦
-      </button>
-      <button class="theme-btn" data-t="aurora-light" onclick="setTheme('aurora-light')">
-        <span class="theme-dot" style="background: #0284C7;"></span> 🌅 晨曦淡彩微光
-      </button>
-      <button class="theme-btn" data-t="cinema-dark" onclick="setTheme('cinema-dark')">
-        <span class="theme-dot" style="background: #1A1C24;"></span> 🌙 好莱坞暗夜
-      </button>
+      <div id="timeBadge" style="display: inline-flex; align-items: center; gap: 6px; padding: 3px 12px; border-radius: 999px; background: var(--badge-bg); border: 1px solid var(--badge-border); font-size: 11px; font-weight: 600; color: var(--primary);">
+        <span class="theme-dot" style="background: var(--primary);"></span>
+        <span id="timePeriodName">正在同步</span>
+      </div>
     </div>
   </div>
 </div>
@@ -967,14 +960,41 @@
 </footer>
 
 <script>
-  // Theme Switcher
-  function setTheme(t) {
-    document.documentElement.setAttribute('data-theme', t);
-    document.querySelectorAll('.theme-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-t') === t);
-    });
-    localStorage.setItem('yimu_theme', t);
+  // 自然节律时间光影引擎 (Chrono-Adaptive Theme Engine)
+  const TIME_SLOTS = [
+    { start: 6,  end: 11, theme: "aurora-light", icon: "🌅", name: "晨曦时分", desc: "晨曦微光 · 清爽冰蓝与朝阳微彩" },
+    { start: 11, end: 17, theme: "apple-light",  icon: "☀️", name: "明亮白昼", desc: "苹果纯净白 · 极简通透与清晰阅读" },
+    { start: 17, end: 21, theme: "warm-cream",   icon: "🛋️", name: "黄昏归家", desc: "北欧暖燕麦 · 客厅沙发的温馨惬意" },
+    { start: 21, end: 6,  theme: "cinema-dark",  icon: "🌙", name: "深夜放映", desc: "好莱坞暗夜 · 关灯沉浸的私人影院" }
+  ];
+
+  function getAutoSlot() {
+    const hour = new Date().getHours();
+    if (hour >= 6 && hour < 11) return TIME_SLOTS[0];
+    if (hour >= 11 && hour < 17) return TIME_SLOTS[1];
+    if (hour >= 17 && hour < 21) return TIME_SLOTS[2];
+    return TIME_SLOTS[3];
   }
+
+  function applyChronoTheme() {
+    const slot = getAutoSlot();
+    document.documentElement.setAttribute("data-theme", slot.theme);
+
+    const now = new Date();
+    const timeStr = String(now.getHours()).padStart(2, "0") + ":" + String(now.getMinutes()).padStart(2, "0");
+
+    const iconEl = document.getElementById("timeIcon");
+    const textEl = document.getElementById("timeText");
+    const periodEl = document.getElementById("timePeriodName");
+
+    if (iconEl) iconEl.textContent = slot.icon;
+    if (textEl) textEl.textContent = slot.name + " (" + timeStr + ") · " + slot.desc;
+    if (periodEl) periodEl.textContent = slot.icon + " " + slot.name;
+  }
+
+  // 初始化执行并每分钟自动校准
+  applyChronoTheme();
+  setInterval(applyChronoTheme, 60000);
 
   // Language Switcher
   function switchLang(lang) {
