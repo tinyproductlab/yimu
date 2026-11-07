@@ -2,7 +2,7 @@
 
 **Effective Date**: November 1, 2026  
 **Last Updated**: November 5, 2026  
-**Developer**: Tinylab (小产品实验室)  
+**Developer**: TinyProductLab (小产品实验室)  
 **WeChat Official Account**: 小产品实验室  
 **Official Website**: https://ym.tinylabpro.com  
 **Support Email**: userfeedback@zohomail.com  
