@@ -636,17 +636,18 @@
 
 
   /* 导航栏光律自适应胶囊与悬停浮层 (Chrono Hover Popover) */
+  /* 极简自然光律时间胶囊 & 手动切换面板 */
   .chrono-pill-wrap {
     position: relative;
-    display: inline-block;
+    user-select: none;
   }
   .chrono-pill {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 5px 12px;
+    gap: 7px;
+    padding: 6px 14px;
     border-radius: 999px;
-    background: var(--badge-bg);
+    background: var(--palette-bg);
     border: 1px solid var(--badge-border);
     font-size: 12px;
     font-weight: 600;
@@ -656,31 +657,42 @@
     white-space: nowrap;
   }
   .chrono-pill:hover {
-    background: var(--primary);
-    color: var(--btn-primary-text);
+    background: var(--tag-bg);
+    border-color: var(--primary);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .chrono-arrow {
+    font-size: 10px;
+    opacity: 0.6;
+    transition: transform 0.2s ease;
+  }
+  .chrono-popover.open .chrono-arrow,
+  .chrono-pill-wrap:hover .chrono-arrow {
+    transform: rotate(180deg);
   }
   .chrono-popover {
     position: absolute;
     top: calc(100% + 10px);
     right: 0;
-    width: 310px;
+    width: 320px;
+    max-width: calc(100vw - 32px);
     background: var(--card-bg);
     border: 1px solid var(--card-border);
-    border-radius: 18px;
-    padding: 16px 18px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    border-radius: 20px;
+    padding: 16px 16px 14px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.22);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
     opacity: 0;
     visibility: hidden;
     transform: translateY(8px);
-    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
-    z-index: 500;
+    transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+    z-index: 999;
     pointer-events: none;
     text-align: left;
   }
+  .chrono-popover.open,
   .chrono-pill-wrap:hover .chrono-popover {
     opacity: 1;
     visibility: visible;
@@ -690,28 +702,115 @@
   .chrono-popover-header {
     display: flex; align-items: center; gap: 8px;
     font-size: 14px; font-weight: 700; color: var(--text);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
   .chrono-popover-desc {
-    font-size: 12px; color: var(--text-sub); line-height: 1.5;
+    font-size: 12px; color: var(--text-sub); line-height: 1.4;
     margin-bottom: 12px; padding-bottom: 10px;
     border-bottom: 1px solid var(--border-subtle);
   }
-  .chrono-schedule {
-    display: flex; flex-direction: column; gap: 6px;
-    font-size: 11px;
+  .chrono-options {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
-  .chrono-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 4px 8px; border-radius: 6px;
-    color: var(--text-sub);
+  .chrono-theme-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 12px;
+    border-radius: 12px;
+    background: var(--palette-bg);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: var(--transition);
   }
-  .chrono-row.current-active {
+  .chrono-theme-btn:hover {
+    background: var(--tag-bg);
+    border-color: var(--border-subtle);
+    transform: translateX(2px);
+  }
+  .chrono-theme-btn.active {
     background: var(--badge-bg);
+    border-color: var(--primary);
+  }
+  .chrono-theme-btn.active .theme-btn-name {
     color: var(--primary);
     font-weight: 700;
   }
-
+  .chrono-theme-btn.active .theme-check {
+    opacity: 1;
+    color: var(--primary);
+    transform: scale(1);
+  }
+  .chrono-theme-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .theme-btn-icon {
+    font-size: 18px;
+  }
+  .theme-btn-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .theme-btn-time {
+    font-size: 11px;
+    color: var(--text-sub);
+    line-height: 1.2;
+  }
+  .theme-check {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--primary);
+    opacity: 0;
+    transform: scale(0.6);
+    transition: all 0.2s ease;
+  }
+  .chrono-auto-divider {
+    height: 1px;
+    background: var(--border-subtle);
+    margin: 10px 0;
+  }
+  .chrono-auto-btn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: transparent;
+    border: 1px dashed var(--border-subtle);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-sub);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .chrono-auto-btn:hover {
+    color: var(--text);
+    border-color: var(--primary);
+    background: var(--palette-bg);
+  }
+  .chrono-auto-btn.active {
+    background: var(--badge-bg);
+    border-color: var(--primary);
+    color: var(--primary);
+    font-weight: 700;
+  }
+  .chrono-auto-btn.active .auto-check {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .auto-check {
+    opacity: 0;
+    transform: scale(0.6);
+    transition: all 0.2s ease;
+    font-weight: 800;
+  }
 
 /* ==========================================================================
    一幕使用指南专区 (全量融入自然节律主题系统)
@@ -1005,41 +1104,77 @@
       <a href="https://tinylabpro.com/" target="_blank" data-zh="小产品实验室" data-en="TinyProductLab">小产品实验室</a>
     </nav>
         <div class="nav-actions">
-      <!-- 极简光律时间胶囊与悬停浮层 -->
+      <!-- 极简光律时间胶囊与手动切换面板 -->
       <div class="chrono-pill-wrap">
-        <div class="chrono-pill" id="timeBadge">
+        <div class="chrono-pill" id="timeBadge" role="button" tabindex="0" title="点击自由切换主题光影">
           <span class="theme-dot" style="background: var(--primary);"></span>
           <span id="timePeriodName">🌙 深夜放映</span>
+          <span class="chrono-arrow">▾</span>
         </div>
-        <!-- 鼠标悬停时优雅浮出的光律卡片 -->
-        <div class="chrono-popover">
+        <!-- 点击/悬停浮出的主题自选手册 -->
+        <div class="chrono-popover" id="chronoPopover">
           <div class="chrono-popover-header">
-            <span id="popoverIcon">🌙</span>
-            <span id="popoverTitle">深夜放映 · 好莱坞暗夜</span>
+            <span id="popoverIcon">🎨</span>
+            <span id="popoverTitle">自由切换主题光影</span>
           </div>
           <div class="chrono-popover-desc" id="popoverDesc">
-            关灯沉浸的私人影院<br>
-            <span style="opacity: 0.75; font-size: 11px;">界面色调随你所在时区晨昏日落自动流转</span>
+            选择你喜欢的观影光色，即时沉浸生效：
           </div>
-          <div class="chrono-schedule">
-            <div class="chrono-row" id="row-aurora">
-              <span>🌅 06:00 - 11:00</span>
-              <span>晨曦淡彩极光</span>
+
+          <div class="chrono-options">
+            <div class="chrono-theme-btn" id="btn-apple-light" onclick="selectTheme('apple-light')">
+              <div class="chrono-theme-left">
+                <span class="theme-btn-icon">☀️</span>
+                <div>
+                  <div class="theme-btn-name">苹果纯白 · 极简通透</div>
+                  <div class="theme-btn-time">11:00 - 17:00 明亮白昼</div>
+                </div>
+              </div>
+              <span class="theme-check">✓</span>
             </div>
-            <div class="chrono-row" id="row-apple">
-              <span>☀️ 11:00 - 17:00</span>
-              <span>苹果纯净通透白</span>
+
+            <div class="chrono-theme-btn" id="btn-warm-cream" onclick="selectTheme('warm-cream')">
+              <div class="chrono-theme-left">
+                <span class="theme-btn-icon">🛋️</span>
+                <div>
+                  <div class="theme-btn-name">北欧暖燕麦 · 温馨舒缓</div>
+                  <div class="theme-btn-time">17:00 - 21:00 黄昏归家</div>
+                </div>
+              </div>
+              <span class="theme-check">✓</span>
             </div>
-            <div class="chrono-row" id="row-warm">
-              <span>🛋️ 17:00 - 21:00</span>
-              <span>北欧暖阳燕麦米白</span>
+
+            <div class="chrono-theme-btn" id="btn-aurora-light" onclick="selectTheme('aurora-light')">
+              <div class="chrono-theme-left">
+                <span class="theme-btn-icon">🌅</span>
+                <div>
+                  <div class="theme-btn-name">晨曦淡彩 · 极光清爽</div>
+                  <div class="theme-btn-time">06:00 - 11:00 晨光初熹</div>
+                </div>
+              </div>
+              <span class="theme-check">✓</span>
             </div>
-            <div class="chrono-row" id="row-cinema">
-              <span>🌙 21:00 - 06:00</span>
-              <span>好莱坞暗夜放映厅</span>
+
+            <div class="chrono-theme-btn" id="btn-cinema-dark" onclick="selectTheme('cinema-dark')">
+              <div class="chrono-theme-left">
+                <span class="theme-btn-icon">🌙</span>
+                <div>
+                  <div class="theme-btn-name">好莱坞暗夜 · 私人影院</div>
+                  <div class="theme-btn-time">21:00 - 06:00 关灯沉浸</div>
+                </div>
+              </div>
+              <span class="theme-check">✓</span>
             </div>
           </div>
+
+          <div class="chrono-auto-divider"></div>
+
+          <button class="chrono-auto-btn" id="chronoAutoBtn" onclick="selectTheme('auto')">
+            <span>✨ 跟随本地时钟自然流转 (自动)</span>
+            <span class="auto-check" id="autoCheck">✓</span>
+          </button>
         </div>
+      </div>
       </div>
       <a href="#guide" class="nav-guide-btn" data-zh="📖 订阅与使用教程" data-en="📖 Guide & Tutorials">📖 订阅与使用教程</a>
       <button class="btn-coffee" id="coffeeBtn" data-zh="♡ 赞赏" data-en="♡ Donate">♡ 赞赏</button>
@@ -1621,12 +1756,21 @@
 </footer>
 
 <script>
-  // 自然节律时间光影引擎 (Chrono-Adaptive Theme Engine)
+  // ==========================================================================
+  // 自然光律与自由主题切换引擎 (支持自选锁定 & 本地自然时钟流转)
+  // ==========================================================================
+  const THEME_INFO = {
+    'apple-light':  { icon: '☀️', name: '苹果纯白', pillText: '☀️ 苹果纯白' },
+    'warm-cream':   { icon: '🛋️', name: '北欧暖燕麦', pillText: '🛋️ 北欧暖燕麦' },
+    'aurora-light': { icon: '🌅', name: '晨曦淡彩', pillText: '🌅 晨曦淡彩' },
+    'cinema-dark':  { icon: '🌙', name: '好莱坞暗夜', pillText: '🌙 深夜放映' }
+  };
+
   const TIME_SLOTS = [
-    { key: "aurora", start: 6,  end: 11, theme: "aurora-light", icon: "🌅", name: "晨曦时分", desc: "晨曦微光 · 清爽冰蓝与朝阳微彩" },
-    { key: "apple",  start: 11, end: 17, theme: "apple-light",  icon: "☀️", name: "明亮白昼", desc: "苹果纯净白 · 极简通透与清晰阅读" },
-    { key: "warm",   start: 17, end: 21, theme: "warm-cream",   icon: "🛋️", name: "黄昏归家", desc: "北欧暖燕麦 · 客厅沙发的温馨惬意" },
-    { key: "cinema", start: 21, end: 6,  theme: "cinema-dark",  icon: "🌙", name: "深夜放映", desc: "好莱坞暗夜 · 关灯沉浸的私人影院" }
+    { key: "aurora", start: 6,  end: 11, theme: "aurora-light", icon: "🌅", name: "晨曦淡彩" },
+    { key: "apple",  start: 11, end: 17, theme: "apple-light",  icon: "☀️", name: "苹果纯白" },
+    { key: "warm",   start: 17, end: 21, theme: "warm-cream",   icon: "🛋️", name: "北欧暖燕麦" },
+    { key: "cinema", start: 21, end: 6,  theme: "cinema-dark",  icon: "🌙", name: "好莱坞暗夜" }
   ];
 
   function getAutoSlot() {
@@ -1637,38 +1781,74 @@
     return TIME_SLOTS[3];
   }
 
-  function applyChronoTheme() {
-    const slot = getAutoSlot();
-    document.documentElement.setAttribute("data-theme", slot.theme);
+  function applyThemeState() {
+    const manualTheme = localStorage.getItem('yimu_manual_theme');
+    const autoSlot = getAutoSlot();
+    const activeTheme = manualTheme || autoSlot.theme;
 
-    const now = new Date();
-    const timeStr = String(now.getHours()).padStart(2, "0") + ":" + String(now.getMinutes()).padStart(2, "0");
+    // 设置根元素主题
+    document.documentElement.setAttribute('data-theme', activeTheme);
 
-    const periodEl = document.getElementById("timePeriodName");
-    const popTitle = document.getElementById("popoverTitle");
-    const popDesc = document.getElementById("popoverDesc");
-    const popIcon = document.getElementById("popoverIcon");
+    // 更新顶栏胶囊文案
+    const periodEl = document.getElementById('timePeriodName');
+    if (periodEl) {
+      if (manualTheme) {
+        periodEl.textContent = THEME_INFO[manualTheme] ? THEME_INFO[manualTheme].pillText : manualTheme;
+      } else {
+        const now = new Date();
+        const timeStr = String(now.getHours()).padStart(2, "0") + ":" + String(now.getMinutes()).padStart(2, "0");
+        periodEl.textContent = autoSlot.icon + " " + autoSlot.name + " (" + timeStr + ")";
+      }
+    }
 
-    if (periodEl) periodEl.textContent = slot.icon + " " + slot.name + " (" + timeStr + ")";
-    if (popTitle) popTitle.textContent = slot.name + " · " + (slot.key === "cinema" ? "好莱坞暗夜" : (slot.key === "warm" ? "暖阳燕麦" : (slot.key === "aurora" ? "晨曦淡彩" : "纯净白")));
-    if (popDesc) popDesc.innerHTML = slot.desc + "<br><span style='opacity: 0.75; font-size: 11px;'>当前 " + timeStr + " · 界面色调随你所在时区晨昏日落自动流转</span>";
-    if (popIcon) popIcon.textContent = slot.icon;
+    // 更新高亮选中态
+    const themes = ['apple-light', 'warm-cream', 'aurora-light', 'cinema-dark'];
+    themes.forEach(t => {
+      const btn = document.getElementById('btn-' + t);
+      if (btn) {
+        btn.classList.toggle('active', manualTheme === t);
+      }
+    });
 
-    // Highlight current active row in popover
-    ["aurora", "apple", "warm", "cinema"].forEach(k => {
-      const el = document.getElementById("row-" + k);
-      if (el) {
-        if (k === slot.key) {
-          el.className = "chrono-row current-active";
-        } else {
-          el.className = "chrono-row";
-        }
+    const autoBtn = document.getElementById('chronoAutoBtn');
+    if (autoBtn) {
+      autoBtn.classList.toggle('active', !manualTheme);
+    }
+  }
+
+  function selectTheme(themeKey) {
+    if (themeKey === 'auto') {
+      localStorage.removeItem('yimu_manual_theme');
+    } else {
+      localStorage.setItem('yimu_manual_theme', themeKey);
+    }
+    applyThemeState();
+  }
+
+  // 点击胶囊展开/收起浮层，点击外部自动关闭
+  const timeBadge = document.getElementById('timeBadge');
+  const popover = document.getElementById('chronoPopover');
+
+  if (timeBadge && popover) {
+    timeBadge.addEventListener('click', (e) => {
+      e.stopPropagation();
+      popover.classList.toggle('open');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!popover.contains(e.target) && e.target !== timeBadge) {
+        popover.classList.remove('open');
       }
     });
   }
 
-  applyChronoTheme();
-  setInterval(applyChronoTheme, 60000);
+  // 初始化主题并启动每分钟时钟校准
+  applyThemeState();
+  setInterval(() => {
+    if (!localStorage.getItem('yimu_manual_theme')) {
+      applyThemeState();
+    }
+  }, 60000);
 
   // Language Switcher
   function switchLang(lang) {
@@ -1699,8 +1879,7 @@
   });
 
   // Init Theme & Lang
-  const savedTheme = localStorage.getItem('yimu_theme') || 'apple-light';
-  setTheme(savedTheme);
+  
 
   const savedLang = localStorage.getItem('yimu_lang');
   if (savedLang === 'en') switchLang('en');
