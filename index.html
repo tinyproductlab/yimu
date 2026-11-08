@@ -712,6 +712,282 @@
     font-weight: 700;
   }
 
+
+/* ==========================================================================
+   一幕使用指南专区 (全量融入自然节律主题系统)
+   ========================================================================== */
+.section-guide {
+  padding: 80px 0 60px;
+  position: relative;
+}
+
+.guide-hero-banner {
+  text-align: center;
+  max-width: 820px;
+  margin: 0 auto 40px;
+}
+
+.guide-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--badge-bg);
+  color: var(--primary);
+  border: 1px solid var(--badge-border);
+  margin-bottom: 16px;
+}
+
+.guide-hero-banner h2 {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.guide-hero-banner p {
+  font-size: 16px;
+  color: var(--text-sub);
+  line-height: 1.6;
+}
+
+/* 指南快速章节跳转导航 */
+.guide-nav-pills {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 24px 0 48px;
+}
+
+.guide-nav-pill {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--palette-bg);
+  border: 1px solid var(--border-subtle);
+  color: var(--text);
+  text-decoration: none;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.guide-nav-pill:hover {
+  background: var(--tag-bg);
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+/* 章节容器与卡片 */
+.guide-chapter {
+  margin-bottom: 56px;
+  scroll-margin-top: 90px;
+}
+
+.guide-chapter-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.guide-chapter-num {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--primary);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 113, 227, 0.25);
+  flex-shrink: 0;
+}
+
+.guide-chapter-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.guide-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+}
+
+.guide-lead-text {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+/* 提示警示框 */
+.guide-alert {
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin: 20px 0;
+  background: var(--badge-bg);
+  border: 1px solid var(--badge-border);
+}
+
+.guide-alert.warning {
+  background: rgba(230, 138, 0, 0.08);
+  border-color: rgba(230, 138, 0, 0.3);
+}
+
+.guide-alert-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.guide-alert.warning .guide-alert-title {
+  color: var(--warning);
+}
+
+.guide-alert-text {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.6;
+}
+
+/* 步骤网格 */
+.guide-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.guide-step-card {
+  background: var(--palette-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+  transition: var(--transition);
+}
+
+.guide-step-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.guide-step-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+
+.guide-step-heading {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.guide-step-desc {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.6;
+}
+
+/* 内嵌截图展示框 */
+.guide-shot-frame {
+  margin: 24px 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  background: var(--bg);
+}
+
+.guide-shot-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.guide-shot-caption {
+  padding: 12px 18px;
+  font-size: 12px;
+  color: var(--text-sub);
+  background: var(--card-header);
+  text-align: center;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* 代码与行内代码 */
+.guide-code-inline {
+  background: var(--palette-bg);
+  border: 1px solid var(--border-subtle);
+  color: var(--primary);
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+}
+
+/* 问答列表 */
+.guide-faq-item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.guide-faq-item:first-child {
+  padding-top: 0;
+}
+
+.guide-faq-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.guide-faq-q {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.guide-faq-a {
+  font-size: 14px;
+  color: var(--text-sub);
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .guide-hero-banner h2 { font-size: 26px; }
+  .guide-chapter-title { font-size: 20px; }
+  .guide-card { padding: 20px; }
+  .guide-steps-grid { grid-template-columns: 1fr; }
+}
+
 </style>
 </head>
 <body>
@@ -725,8 +1001,8 @@
     <nav class="nav-menu">
       <a href="#showcase" data-zh="三端图赏" data-en="Showcase">三端图赏</a>
       <a href="#features" data-zh="功能特色" data-en="Features">功能特色</a>
-      <a href="#appletv-china" data-zh="Apple TV 中国区说明" data-en="Apple TV FAQ">Apple TV 中国区说明</a>
-      <a href="https://tinylabpro.com/" target="_blank" data-zh="小产品实验室" data-en="TinyLab">小产品实验室</a>
+      <a href="#tvos-guide" data-zh="Apple TV 中国区说明" data-en="Apple TV FAQ">Apple TV 中国区说明</a>
+      <a href="https://tinylabpro.com/" target="_blank" data-zh="小产品实验室" data-en="TinyProductLab">小产品实验室</a>
     </nav>
         <div class="nav-actions">
       <!-- 极简光律时间胶囊与悬停浮层 -->
@@ -765,7 +1041,7 @@
           </div>
         </div>
       </div>
-      <a href="guide.html" class="nav-guide-btn" data-zh="📖 订阅与使用教程" data-en="📖 Guide & Tutorials">📖 订阅与使用教程</a>
+      <a href="#guide" class="nav-guide-btn" data-zh="📖 订阅与使用教程" data-en="📖 Guide & Tutorials">📖 订阅与使用教程</a>
       <button class="btn-coffee" id="coffeeBtn" data-zh="♡ 赞赏" data-en="♡ Donate">♡ 赞赏</button>
       <div class="lang-switch">
         <button id="btnZh" class="active" onclick="switchLang('zh')">中</button>
@@ -785,7 +1061,7 @@
     </div>
     <div class="hero-cta">
       <a href="https://apps.apple.com/app/id6742337772" target="_blank" class="btn btn-primary" data-zh="🍎 App Store 下载 (Mac · iOS · tvOS 通用购买)" data-en="🍎 App Store (Mac · iOS · tvOS Universal)">🍎 App Store 下载 (Mac · iOS · tvOS 通用购买)</a>
-      <a href="guide.html" class="btn btn-outline" data-zh="📖 订阅链接与全平台教程" data-en="📖 Subscription & Setup Guide">📖 订阅链接与全平台教程</a>
+      <a href="#guide" class="btn btn-outline" data-zh="📖 订阅链接与全平台教程" data-en="📖 Subscription & Setup Guide">📖 订阅链接与全平台教程</a>
     </div>
   </div>
 </section>
@@ -916,38 +1192,7 @@
 </section>
 
 <!-- 中国大陆用户 Apple TV 安装与使用解答专区 -->
-<section class="section-appletv-china" id="appletv-china">
-  <div class="container">
-    <div class="china-tv-card">
-      <div class="china-tv-badge" data-zh="📺 核心解答 · 中国大陆 Apple TV 用户必读" data-en="📺 Apple TV Mainland China User Notice">📺 核心解答 · 中国大陆 Apple TV 用户必读</div>
-      <h3 data-zh="关于中国大陆 Apple ID 无法直接在电视上看到 App Store 的解答" data-en="About Apple TV App Store Availability with Mainland China Apple ID">关于中国大陆 Apple ID 无法直接在电视上看到 App Store 的解答</h3>
-      <p class="lead" data-zh="由于 Apple TV 硬件设备未在中国大陆地区正式发售，苹果官方系统机制规定：当 Apple TV 登录中国大陆 Apple ID 时，桌面会自动隐藏 App Store 商店图标。但这丝毫不会影响您在一幕享受客厅影院！一幕官方支持「一键扫码激活与订阅下发」技术：" data-en="Because Apple TV hardware is not officially sold in Mainland China, Apple hides the App Store when logged in with a Mainland China Apple ID. YiMu provides an elegant seamless solution:">由于 Apple TV 硬件设备未在中国大陆地区正式发售，苹果官方系统机制规定：当 Apple TV 登录中国大陆 Apple ID 时，桌面会自动隐藏 App Store 商店图标。但这丝毫不会影响您在一幕享受客厅影院！一幕官方支持「一键扫码激活与订阅下发」技术：</p>
 
-      <div class="tv-solution-grid">
-        <div class="tv-solution-item">
-          <div class="tv-solution-num" data-zh="第 1 步 · 免费下载" data-en="Step 1 · Free Download">第 1 步 · 免费下载</div>
-          <div class="tv-solution-title" data-zh="外区账号登录电视下载" data-en="Download via Global Account">外区账号登录电视下载</div>
-          <div class="tv-solution-desc" data-zh="Apple TV「设置」添加一个外区 Apple ID（美区/港区/日区等免费账号），在电视 App Store 免费搜索并下载「一幕 YiMu」。" data-en="Add any free global Apple ID (US/HK/JP) to your TV, search and download YiMu for free from tvOS App Store.">Apple TV「设置」添加一个外区 Apple ID（美区/港区/日区等免费账号），在电视 App Store 免费搜索并下载「一幕 YiMu」。</div>
-        </div>
-        <div class="tv-solution-item">
-          <div class="tv-solution-num" data-zh="第 2 步 · 打开大屏" data-en="Step 2 · Open Screen">第 2 步 · 打开大屏</div>
-          <div class="tv-solution-title" data-zh="切换至「导入连接」标签" data-en="Navigate to Import Tab">切换至「导入连接」标签</div>
-          <div class="tv-solution-desc" data-zh="打开电视上的「一幕」，切换到顶部「导入连接」标签，大屏幕中央将立即呈现专属的安全动态二维码。" data-en="Open YiMu on TV, go to 'Import Connection' tab. A dynamic pairing QR code appears instantly on screen.">打开电视上的「一幕」，切换到顶部「导入连接」标签，大屏幕中央将立即呈现专属的安全动态二维码。</div>
-        </div>
-        <div class="tv-solution-item">
-          <div class="tv-solution-num" data-zh="第 3 步 · 扫码即享" data-en="Step 3 · Scan & Enjoy">第 3 步 · 扫码即享</div>
-          <div class="tv-solution-title" data-zh="主力手机扫一扫立即激活" data-en="Scan with iPhone to Activate">主力手机扫一扫立即激活</div>
-          <div class="tv-solution-desc" data-zh="拿起您日常登录国区 Apple ID 的 iPhone，打开「一幕」扫描电视，手机上的订阅与 Pro 会员权益秒级下发，无需在电视重复购买！" data-en="Scan the TV screen with your iPhone (even with China Apple ID). Pro privileges and subscriptions sync in 1 second without double payment!">拿起您日常登录国区 Apple ID 的 iPhone，打开「一幕」扫描电视，手机上的订阅与 Pro 会员权益秒级下发，无需在电视重复购买！</div>
-        </div>
-      </div>
-
-      <div class="china-tv-bottom">
-        <div class="china-tv-tip" data-zh="💡 完美打通：免去大屏逐字输入长链接与密码，实现国区 iPhone 购买、全家 Apple TV 自由畅看。" data-en="💡 Perfect sync: No tedious typing on Siri remote, buy once on iPhone, enjoy on Apple TV.">💡 完美打通：免去大屏逐字输入长链接与密码，实现国区 iPhone 购买、全家 Apple TV 自由畅看。</div>
-        <a href="guide.html#tvos-guide" class="btn btn-outline" style="border-color: var(--primary); color: var(--text);" data-zh="👉 查看 Apple TV 详细图文图解教程" data-en="👉 Read Full Apple TV Tutorial">👉 查看 Apple TV 详细图文图解教程</a>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- 核心特色 Features -->
 <section class="section-features" id="features">
@@ -998,6 +1243,241 @@
   </div>
 </section>
 
+
+<!-- ==========================================================================
+     使用指南与全平台教程专区 (100% 融入自然节律主题)
+     ========================================================================== -->
+<section class="section-guide" id="guide">
+  <div class="container">
+
+    <div class="guide-hero-banner">
+      <div class="guide-badge" data-zh="📖 官方使用手册 · 全平台教程" data-en="📖 Official User Guide & Tutorials">
+        📖 官方使用手册 · 全平台教程
+      </div>
+      <h2 data-zh="一幕 YiMu · 订阅链接与影视使用教程" data-en="YiMu Player · Subscription & Setup Guide">
+        一幕 YiMu · 订阅链接与影视使用教程
+      </h2>
+      <p data-zh="掌握开放标准订阅链接添加、TMDB 影视刮削、在线字幕时间轴微调，以及 Apple TV 跨端免密扫码投屏全流程。" data-en="Master M3U standard subscriptions, TMDB metadata scraping, subtitle micro-delay tuning, and Apple TV seamless QR synchronization.">
+        掌握开放标准订阅链接添加、TMDB 影视刮削、在线字幕时间轴微调，以及 Apple TV 跨端免密扫码投屏全流程。
+      </p>
+
+      <div class="guide-nav-pills">
+        <a href="#m3u-intro" class="guide-nav-pill" data-zh="1. 什么是订阅链接" data-en="1. What is M3U">1. 什么是订阅链接</a>
+        <a href="#mac-guide" class="guide-nav-pill" data-zh="2. Mac 电脑端" data-en="2. Mac Guide">2. Mac 电脑端</a>
+        <a href="#ios-guide" class="guide-nav-pill" data-zh="3. iPhone / iPad" data-en="3. iOS Guide">3. iPhone / iPad</a>
+        <a href="#tvos-guide" class="guide-nav-pill" data-zh="4. Apple TV 国区全解" data-en="4. Apple TV Guide">4. Apple TV 国区全解</a>
+        <a href="#faq" class="guide-nav-pill" data-zh="5. 常见技术问答" data-en="5. FAQ">5. 常见技术问答</a>
+      </div>
+    </div>
+
+    <!-- 章节 1: 什么是订阅链接 -->
+    <div class="guide-chapter" id="m3u-intro">
+      <div class="guide-chapter-header">
+        <div class="guide-chapter-num">1</div>
+        <h3 class="guide-chapter-title" data-zh="什么是订阅链接？" data-en="What is a Subscription Link?">什么是订阅链接？</h3>
+      </div>
+      <div class="guide-card">
+        <p class="guide-lead-text" data-zh="订阅链接（通常是以 <span class='guide-code-inline'>.m3u</span>、<span class='guide-code-inline'>.m3u8</span> 或 <span class='guide-code-inline'>.txt</span> 结尾的网络 URL，或者是合规的频道列表）是一种开放的标准播放索引格式。它本身并不储存任何音视频文件，而是像一本<strong>「影视节目目录」</strong>，记录了各电视频道或点播视频的播放流地址、节目名称与分组分类。" data-en="A subscription link (usually ending in .m3u, .m3u8, or .txt) is an open standard playback index. It stores no media files itself, serving as an index catalog with stream URLs, titles, and categories.">
+          订阅链接（通常是以 <span class="guide-code-inline">.m3u</span>、<span class="guide-code-inline">.m3u8</span> 或 <span class="guide-code-inline">.txt</span> 结尾的网络 URL，或者是合规的频道列表）是一种开放的标准播放索引格式。它本身并不储存任何音视频文件，而是像一本<strong>「影视节目目录」</strong>，记录了各电视频道或点播视频的播放流地址、节目名称与分组分类。
+        </p>
+
+        <div class="guide-alert warning">
+          <div class="guide-alert-title" data-zh="⚠️ 软件中立与隐私安全声明" data-en="⚠️ Technical Neutrality & Privacy Statement">
+            ⚠️ 软件中立与隐私安全声明
+          </div>
+          <div class="guide-alert-text" data-zh="一幕 YiMu 是一款严格恪守<strong>纯技术中立</strong>的本地媒体播放工具，<strong>自身不提供、不分发、不托管、亦不内置任何受版权保护的音视频内容</strong>。所有播放链接均由用户根据合法合规的来源自行导入。一幕采用零云端隐私架构，您的任何订阅链接和访问凭据均 100% 仅保存在本机钥匙串与沙盒中，绝不上传到任何开发者服务器。" data-en="YiMu Player is strictly technically neutral and does not host, provide, or distribute any copyrighted media. All links are imported by users. Your credentials remain 100% in local Keychain and sandbox.">
+            一幕 YiMu 是一款严格恪守<strong>纯技术中立</strong>的本地媒体播放工具，<strong>自身不提供、不分发、不托管、亦不内置任何受版权保护的音视频内容</strong>。所有播放链接均由用户根据合法合规的来源自行导入。一幕采用零云端隐私架构，您的任何订阅链接和访问凭据均 100% 仅保存在本机钥匙串与沙盒中，绝不上传到任何开发者服务器。
+          </div>
+        </div>
+
+        <div class="guide-steps-grid">
+          <div class="guide-step-card">
+            <div class="guide-step-tag" data-zh="标准 M3U / M3U8 订阅" data-en="Standard M3U / M3U8">标准 M3U / M3U8 订阅</div>
+            <div class="guide-step-heading" data-zh="以 http / https 开头" data-en="Starts with http / https">以 http / https 开头</div>
+            <div class="guide-step-desc" data-zh="最常见的标准网络订阅，输入完整 URL 即可由一幕每日自动拉取最新频道列表与节目单 (EPG)。" data-en="Standard network playlist. YiMu periodically syncs the latest channel list and EPG program guides.">最常见的标准网络订阅，输入完整 URL 即可由一幕每日自动拉取最新频道列表与节目单 (EPG)。</div>
+          </div>
+          <div class="guide-step-card">
+            <div class="guide-step-tag" data-zh="纯文本 TXT 订阅" data-en="Plain Text TXT">纯文本 TXT 订阅</div>
+            <div class="guide-step-heading" data-zh="格式为：频道名,播放地址" data-en="Format: Name, Stream URL">格式为：频道名,播放地址</div>
+            <div class="guide-step-desc" data-zh="国内源常见的每行一条简明格式。一幕内置自适应解析引擎，能够自动识别并无损转换。" data-en="Common simple text format. YiMu built-in parsing engine converts it seamlessly.">国内源常见的每行一条简明格式。一幕内置自适应解析引擎，能够自动识别并无损转换。</div>
+          </div>
+          <div class="guide-step-card">
+            <div class="guide-step-tag" data-zh="NAS 私有流媒体" data-en="Private NAS Media">NAS 私有流媒体</div>
+            <div class="guide-step-heading" data-zh="SMB / WebDAV / Emby" data-en="SMB / WebDAV / Emby">SMB / WebDAV / Emby</div>
+            <div class="guide-step-desc" data-zh="支持直接连接家庭局域网 NAS。访问密码直接存入 Apple 硬件钥匙串，绝不泄露。" data-en="Connect your local NAS directly. Credentials enter Apple hardware Keychain securely.">支持直接连接家庭局域网 NAS。访问密码直接存入 Apple 硬件钥匙串，绝不泄露。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 章节 2: Mac 电脑端使用指引 -->
+    <div class="guide-chapter" id="mac-guide">
+      <div class="guide-chapter-header">
+        <div class="guide-chapter-num">2</div>
+        <h3 class="guide-chapter-title" data-zh="Mac 电脑端使用指南" data-en="Mac Desktop User Guide">Mac 电脑端使用指南</h3>
+      </div>
+      <div class="guide-card">
+        <p class="guide-lead-text" data-zh="Mac 端专为 macOS 桌面优化，支持键盘快捷键、TMDB 影视刮削海报墙、悬浮画中画以及线路快速测活。" data-en="Optimized for macOS desktop with keyboard shortcuts, TMDB movie poster wall, picture-in-picture, and real-time channel speed probing.">
+          Mac 端专为 macOS 桌面优化，支持键盘快捷键、TMDB 影视刮削海报墙、悬浮画中画以及线路快速测活。
+        </p>
+
+        <div class="guide-shot-frame">
+          <img src="assets/shot-mac.png" alt="一幕 Mac 端沉浸式海报墙与详情页界面">
+          <div class="guide-shot-caption" data-zh="Mac 桌面端：4K 极清海报墙 · TMDB 沉浸详情页 · 选集与线路测活一览无余" data-en="Mac Desktop: 4K Movie Posters, TMDB Details, and Channel Speed Probing">
+            Mac 桌面端：4K 极清海报墙 · TMDB 沉浸详情页 · 选集与线路测活一览无余
+          </div>
+        </div>
+
+        <div class="guide-steps-grid">
+          <div class="guide-step-card">
+            <div class="guide-step-tag" data-zh="第 1 步" data-en="Step 1">第 1 步</div>
+            <div class="guide-step-heading" data-zh="添加订阅源" data-en="Add Subscription">添加订阅源</div>
+            <div class="guide-step-desc" data-zh="点击顶栏或按快捷键 <span class='guide-code-inline'>⌘ ,</span>，在订阅源管理中点击「添加订阅」，粘贴您的 M3U/TXT 链接即可保存。" data-en="Click the management icon or press ⌘, paste your M3U or TXT link and save.">点击顶栏或按快捷键 <span class="guide-code-inline">⌘ ,</span>，在订阅源管理中点击「添加订阅」，粘贴您的 M3U/TXT 链接即可保存。</div>
+          </div>
+          <div class="guide-step-card">
+            <div class="guide-step-tag" data-zh="第 2 步" data-en="Step 2">第 2 步</div>
+            <div class="guide-step-heading" data-zh="开启 TMDB 刮削" data-en="Enable TMDB Scraping">开启 TMDB 刮削</div>
+            <div class="guide-step-desc" data-zh="一幕内置开源元数据服务，进入「影视点播」后自动匹配精美海报、剧情简介与演职员头像，打造私人影院。" data-en="YiMu matches movie posters, synopsis, and cast automatically into a private cinema.">一幕内置开源元数据服务，进入「影视点播」后自动匹配精美海报、剧情简介与演职员头像，打造私人影院。</div>
+          </div>
+          <div class="guide-step-card">
+            <div class="guide-step-tag" data-zh="第 3 步" data-en="Step 3">第 3 步</div>
+            <div class="guide-step-heading" data-zh="⚡️ 快捷线路测活" data-en="⚡️ Speed & Health Probe">⚡️ 快捷线路测活</div>
+            <div class="guide-step-desc" data-zh="在电影详情或频道列表页，点击「测活」小雷电图标，1 秒检测所有片源延迟，标红失效节点，自动推荐最优线路。" data-en="Click the bolt icon to test latency across all stream nodes and highlight active ones.">在电影详情或频道列表页，点击「测活」小雷电图标，1 秒检测所有片源延迟，标红失效节点，自动推荐最优线路。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 章节 3: iPhone / iPad 移动端使用指引 -->
+    <div class="guide-chapter" id="ios-guide">
+      <div class="guide-chapter-header">
+        <div class="guide-chapter-num">3</div>
+        <h3 class="guide-chapter-title" data-zh="iPhone / iPad 移动端使用指南" data-en="iPhone & iPad User Guide">iPhone / iPad 移动端使用指南</h3>
+      </div>
+      <div class="guide-card">
+        <p class="guide-lead-text" data-zh="针对触屏交互深度定制，上下滑屏无缝换台，支持系统级画中画与在线字幕微调。" data-en="Crafted for touch: swipe gestures for seamless channel switching, Picture-in-Picture, and online subtitle synchronization.">
+          针对触屏交互深度定制，上下滑屏无缝换台，支持系统级画中画与在线字幕微调。
+        </p>
+
+        <div class="guide-shot-frame" style="max-width: 500px; margin: 24px auto;">
+          <img src="assets/shot-ios.png" alt="一幕 iPhone 移动端沉浸体验">
+          <div class="guide-shot-caption" data-zh="iPhone 移动端：单手滑动手势极速换台 · 悬浮画中画 · 在线外挂字幕匹配" data-en="iPhone: Single-hand swipe switching, Picture-in-Picture, and subtitle tuning">
+            iPhone 移动端：单手滑动手势极速换台 · 悬浮画中画 · 在线外挂字幕匹配
+          </div>
+        </div>
+
+        <div class="guide-steps-grid">
+          <div class="guide-step-card">
+            <div class="guide-step-tag" data-zh="触屏手势" data-en="Touch Gestures">触屏手势</div>
+            <div class="guide-step-heading" data-zh="上下滑动顺畅切台" data-en="Swipe to Switch Channels">上下滑动顺畅切台</div>
+            <div class="guide-step-desc" data-zh="在全屏播放直播或剧集时，屏幕右侧上下滑动切台，左侧调节亮度，双指捏合轻松缩放画面填充。" data-en="Swipe vertically on the right side to switch channels, left side to adjust brightness.">在全屏播放直播或剧集时，屏幕右侧上下滑动切台，左侧调节亮度，双指捏合轻松缩放画面填充。</div>
+          </div>
+          <div class="guide-step-card">
+            <div class="guide-step-tag" data-zh="外挂字幕" data-en="Subtitles">外挂字幕</div>
+            <div class="guide-step-heading" data-zh="自动检索与时间轴微调" data-en="Search & Timeline Delay">自动检索与时间轴微调</div>
+            <div class="guide-step-desc" data-zh="点击播放底栏「字幕」图标，一键下载双语字幕。支持 <span class='guide-code-inline'>-0.5s</span>、<span class='guide-code-inline'>+0.1s</span> 精细校准，再也不怕音画不同步。" data-en="Download subtitles with one tap. Fine-tune by ±0.1s or ±0.5s to fix audio sync issues.">点击播放底栏「字幕」图标，一键下载双语字幕。支持 <span class="guide-code-inline">-0.5s</span>、<span class="guide-code-inline">+0.1s</span> 精细校准，再也不怕音画不同步。</div>
+          </div>
+          <div class="guide-step-card">
+            <div class="guide-step-tag" data-zh="跨端下发" data-en="Sync to TV">跨端下发</div>
+            <div class="guide-step-heading" data-zh="一键将订阅扫入电视" data-en="Scan QR to Send to Apple TV">一键将订阅扫入电视</div>
+            <div class="guide-step-desc" data-zh="在 iPhone 上完成配置后，打开「互传导入」扫描电视端二维码，一秒将手机订阅与会员全部带给电视。" data-en="Scan the Apple TV screen QR code with your iPhone to instantly sync subscriptions.">在 iPhone 上完成配置后，打开「互传导入」扫描电视端二维码，一秒将手机订阅与会员全部带给电视。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 章节 4: Apple TV 大屏端与中国区特别指南 (兼容 #appletv-china 锚点) -->
+    <div class="guide-chapter" id="tvos-guide">
+      <div id="appletv-china" style="position: relative; top: -80px; visibility: hidden;"></div>
+      <div class="guide-chapter-header">
+        <div class="guide-chapter-num">4</div>
+        <h3 class="guide-chapter-title" data-zh="Apple TV (tvOS) 大屏端与中国区账号安装全解" data-en="Apple TV (tvOS) Big Screen & China Account Setup">Apple TV (tvOS) 大屏端与中国区账号安装全解</h3>
+      </div>
+      <div class="guide-card">
+        <div class="guide-alert">
+          <div class="guide-alert-title" data-zh="💡 核心须知：关于中国大陆 Apple ID 在 Apple TV 上的官方机制解答" data-en="💡 Essential Notice: Apple TV Mainland China Account Mechanism">
+            💡 核心须知：关于中国大陆 Apple ID 在 Apple TV 上的官方机制解答
+          </div>
+          <div class="guide-alert-text" data-zh="由于 Apple TV 硬件设备未在中国大陆地区正式发售，苹果官方系统机制规定：<strong>任何使用中国大陆（国区）Apple ID 登录的 Apple TV，桌面均会自动隐藏 App Store 商店图标，无法直接搜索或安装第三方 App</strong>。<br><br>但这丝毫不会影响您在一幕享受客厅影院！请按照以下国内发烧友标准的 3 步操作，即可永久顺畅使用「一幕」：" data-en="Because Apple TV is not officially distributed in Mainland China, Apple automatically hides App Store when logged into a China Apple ID. YiMu provides an elegant 3-step solution:">
+            由于 Apple TV 硬件设备未在中国大陆地区正式发售，苹果官方系统机制规定：<strong>任何使用中国大陆（国区）Apple ID 登录的 Apple TV，桌面均会自动隐藏 App Store 商店图标，无法直接搜索或安装第三方 App</strong>。<br><br>
+            但这丝毫不会影响您在一幕享受客厅影院！请按照以下国内发烧友标准的 3 步操作，即可永久顺畅使用「一幕」：
+          </div>
+        </div>
+
+        <div class="guide-steps-grid">
+          <div class="guide-step-card">
+            <div class="guide-step-tag" data-zh="第 1 步 · 免费下载" data-en="Step 1 · Free Download">第 1 步 · 免费下载</div>
+            <div class="guide-step-heading" data-zh="外区账号登录电视下载" data-en="Download via Global Account">外区账号登录电视下载</div>
+            <div class="guide-step-desc" data-zh="Apple TV「设置」->「用户与账户」添加一个外区 Apple ID（美区/港区/日区等免费账号），在电视 App Store 免费搜索并下载「一幕 YiMu」。" data-en="Add any free global Apple ID (US/HK/JP) in Apple TV Settings, search and download YiMu for free.">Apple TV「设置」->「用户与账户」添加一个外区 Apple ID（美区/港区/日区等免费账号），在电视 App Store 免费搜索并下载「一幕 YiMu」。</div>
+          </div>
+          <div class="guide-step-card">
+            <div class="guide-step-tag" data-zh="第 2 步 · 打开大屏" data-en="Step 2 · Open Big Screen">第 2 步 · 打开大屏</div>
+            <div class="guide-step-heading" data-zh="切换至「导入连接」标签" data-en="Go to Import Tab">切换至「导入连接」标签</div>
+            <div class="guide-step-desc" data-zh="打开电视上的「一幕」，使用遥控器切换到顶部第四个标签「导入连接」，大屏中央将立即呈现专属于本设备的动态安全二维码。" data-en="Open YiMu on TV, switch to the 4th tab 'Import', where a dedicated QR code appears instantly.">打开电视上的「一幕」，使用遥控器切换到顶部第四个标签「导入连接」，大屏中央将立即呈现专属于本设备的动态安全二维码。</div>
+          </div>
+          <div class="guide-step-card">
+            <div class="guide-step-tag" data-zh="第 3 步 · 手机扫一扫" data-en="Step 3 · Scan with Phone">第 3 步 · 手机扫一扫</div>
+            <div class="guide-step-heading" data-zh="免密秒级跨屏同步" data-en="Instant Sync">免密秒级跨屏同步</div>
+            <div class="guide-step-desc" data-zh="拿起您的主力 iPhone（即使是国区账号已购 Pro），打开「一幕」扫描电视屏幕。所有片单、订阅与会员权益瞬间下发给大屏！" data-en="Scan the TV screen with your iPhone. Subscriptions and Pro status sync instantly.">拿起您的主力 iPhone（即使是国区账号已购 Pro），打开「一幕」扫描电视屏幕。所有片单、订阅与会员权益瞬间下发给大屏！</div>
+          </div>
+        </div>
+
+        <div class="guide-shot-frame" style="margin-top: 28px;">
+          <img src="assets/shot-tvos.png" alt="Apple TV 客厅沉浸海报墙">
+          <div class="guide-shot-caption" data-zh="Apple TV 原生大屏：4K HDR 超高清海报瀑布流 · 客厅影院极致视听" data-en="Apple TV: 4K HDR poster wall and home theater experience">
+            Apple TV 原生大屏：4K HDR 超高清海报瀑布流 · 客厅影院极致视听
+          </div>
+        </div>
+
+        <div class="guide-shot-frame" style="margin-top: 24px;">
+          <img src="assets/shot-tvos-import.png" alt="Apple TV 大屏免输密码扫码同步">
+          <div class="guide-shot-caption" data-zh="Apple TV「导入连接」：免去遥控器逐字输入长链接与密码，手机扫码即可极速同步" data-en="Apple TV Import: Scan with phone to skip cumbersome remote typing">
+            Apple TV「导入连接」：免去遥控器逐字输入长链接与密码，手机扫码即可极速同步
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 章节 5: 常见问题排错 (FAQ) -->
+    <div class="guide-chapter" id="faq">
+      <div class="guide-chapter-header">
+        <div class="guide-chapter-num">5</div>
+        <h3 class="guide-chapter-title" data-zh="常见问题排查与技术问答" data-en="Frequently Asked Questions">常见问题排查与技术问答</h3>
+      </div>
+      <div class="guide-card">
+        <div class="guide-faq-item">
+          <div class="guide-faq-q" data-zh="Q1: 为什么部分影视或频道播放提示加载失败？" data-en="Q1: Why do some streams fail to load?">
+            Q1: 为什么部分影视或频道播放提示加载失败？
+          </div>
+          <div class="guide-faq-a" data-zh="A: 互联网流媒体链接可能因发布方服务器停机、带宽超载或设置了 Referer 防盗链而失效。建议使用一幕内置的「⚡️ 线路测活」功能，系统会自动标注红色不可用节点并推荐可用源。" data-en="A: Stream links may expire or suffer from server outages. Use YiMu built-in Speed Probe to identify working channels.">
+            A: 互联网流媒体链接可能因发布方服务器停机、带宽超载或设置了 Referer 防盗链而失效。建议使用一幕内置的「⚡️ 线路测活」功能，系统会自动标注红色不可用节点并推荐可用源。
+          </div>
+        </div>
+
+        <div class="guide-faq-item">
+          <div class="guide-faq-q" data-zh="Q2: 外挂字幕出现音画不同步（快了半秒或慢了半秒）如何解决？" data-en="Q2: How to fix audio/subtitle desync?">
+            Q2: 外挂字幕出现音画不同步（快了半秒或慢了半秒）如何解决？
+          </div>
+          <div class="guide-faq-a" data-zh="A: 在播放器底栏点击「字幕」，面板顶部提供 <span class='guide-code-inline'>-0.5s</span>、<span class='guide-code-inline'>-0.1s</span>、<span class='guide-code-inline'>+0.1s</span>、<span class='guide-code-inline'>+0.5s</span> 以及 <span class='guide-code-inline'>复位</span> 按钮。轻点即可实时微调字幕时间轴，彻底根治不同片源帧率差异。" data-en="A: Tap Subtitles on the player bar, use the micro-delay buttons (±0.1s, ±0.5s) to calibrate subtitles in real time.">
+            A: 在播放器底栏点击「字幕」，面板顶部提供 <span class="guide-code-inline">-0.5s</span>、<span class="guide-code-inline">-0.1s</span>、<span class="guide-code-inline">+0.1s</span>、<span class="guide-code-inline">+0.5s</span> 以及 <span class="guide-code-inline">复位</span> 按钮。轻点即可实时微调字幕时间轴，彻底根治不同片源帧率差异。
+          </div>
+        </div>
+
+        <div class="guide-faq-item">
+          <div class="guide-faq-q" data-zh="Q3: 我的订阅数据会上传到你们的服务器吗？" data-en="Q3: Does my playlist data upload to any server?">
+            Q3: 我的订阅数据会上传到你们的服务器吗？
+          </div>
+          <div class="guide-faq-a" data-zh="A: <strong>绝对不会！</strong>一幕采用坚定的零上云隐私架构，所有订阅源、密码凭据与观影历史均存储在您本机的沙盒数据库与安全钥匙串中，多端同步完全走您的私有 iCloud 容器或局域网直传，绝不经过任何第三方服务器。" data-en="A: Absolutely not. YiMu uses a zero-cloud architecture. All data stays strictly in local sandbox and iCloud.">
+            A: <strong>绝对不会！</strong>一幕采用坚定的零上云隐私架构，所有订阅源、密码凭据与观影历史均存储在您本机的沙盒数据库与安全钥匙串中，多端同步完全走您的私有 iCloud 容器或局域网直传，绝不经过任何第三方服务器。
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
 <!-- Coffee Modal -->
 <div class="coffee-modal" id="coffeeModal">
   <div class="coffee-modal-content">
@@ -1028,7 +1508,7 @@
       <div class="footer-links-col">
         <h5 data-zh="导航与文档" data-en="Docs & Links">导航与文档</h5>
         <ul>
-          <li><a href="guide.html" data-zh="📖 订阅与使用指南" data-en="📖 Guide & Tutorials">📖 订阅与使用指南</a></li>
+          <li><a href="#guide" data-zh="📖 订阅与使用指南" data-en="📖 Guide & Tutorials">📖 订阅与使用指南</a></li>
           <li><a href="guide.html#m3u-intro" data-zh="什么是 M3U 订阅" data-en="What is M3U">什么是 M3U 订阅</a></li>
           <li><a href="guide.html#tvos-guide" data-zh="Apple TV 安装全解" data-en="Apple TV Setup">Apple TV 安装全解</a></li>
           <li><a href="https://tinylabpro.com/" target="_blank" data-zh="小产品实验室官网" data-en="TinyProductLab Official">小产品实验室官网</a></li>
@@ -1112,7 +1592,7 @@
     document.documentElement.lang = isEn ? 'en' : 'zh-Hans';
     document.querySelectorAll('[data-zh]').forEach(el => {
       const text = isEn ? el.getAttribute('data-en') : el.getAttribute('data-zh');
-      if (text) el.textContent = text;
+      if (text) el.innerHTML = text;
     });
     document.getElementById('btnZh').classList.toggle('active', !isEn);
     document.getElementById('btnEn').classList.toggle('active', isEn);
