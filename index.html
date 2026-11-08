@@ -1387,13 +1387,16 @@
     </div>
 
     <!-- 章节 4: Apple TV 大屏端与中国区特别指南 (兼容 #appletv-china 锚点) -->
+        <!-- 章节 4: Apple TV 大屏端全功能矩阵与中国区特别指南 (兼容 #appletv-china 锚点) -->
     <div class="guide-chapter" id="tvos-guide">
       <div id="appletv-china" style="position: relative; top: -80px; visibility: hidden;"></div>
       <div class="guide-chapter-header">
         <div class="guide-chapter-num">4</div>
-        <h3 class="guide-chapter-title" data-zh="Apple TV (tvOS) 大屏端与中国区账号安装全解" data-en="Apple TV (tvOS) Big Screen & China Account Setup">Apple TV (tvOS) 大屏端与中国区账号安装全解</h3>
+        <h3 class="guide-chapter-title" data-zh="Apple TV (tvOS) 大屏全功能架构与订阅全解" data-en="Apple TV (tvOS) Full Features & Subscription Guide">Apple TV (tvOS) 大屏全功能架构与订阅全解</h3>
       </div>
       <div class="guide-card">
+
+        <!-- 官方机制解答 -->
         <div class="guide-alert">
           <div class="guide-alert-title" data-zh="💡 核心须知：关于中国大陆 Apple ID 在 Apple TV 上的官方机制解答" data-en="💡 Essential Notice: Apple TV Mainland China Account Mechanism">
             💡 核心须知：关于中国大陆 Apple ID 在 Apple TV 上的官方机制解答
@@ -1413,30 +1416,111 @@
           <div class="guide-step-card">
             <div class="guide-step-tag" data-zh="第 2 步 · 打开大屏" data-en="Step 2 · Open Big Screen">第 2 步 · 打开大屏</div>
             <div class="guide-step-heading" data-zh="切换至「导入连接」标签" data-en="Go to Import Tab">切换至「导入连接」标签</div>
-            <div class="guide-step-desc" data-zh="打开电视上的「一幕」，使用遥控器切换到顶部第四个标签「导入连接」，大屏中央将立即呈现专属于本设备的动态安全二维码。" data-en="Open YiMu on TV, switch to the 4th tab 'Import', where a dedicated QR code appears instantly.">打开电视上的「一幕」，使用遥控器切换到顶部第四个标签「导入连接」，大屏中央将立即呈现专属于本设备的动态安全二维码。</div>
+            <div class="guide-step-desc" data-zh="打开电视上的「一幕」，使用遥控器切换到顶部第五个标签「导入连接」，大屏中央将立即呈现专属于本设备的动态安全二维码与流媒体状态仪表盘。" data-en="Open YiMu on TV, switch to the 5th tab 'Import', where a dedicated QR code appears instantly.">打开电视上的「一幕」，使用遥控器切换到顶部第五个标签「导入连接」，大屏中央将立即呈现专属于本设备的动态安全二维码与流媒体状态仪表盘。</div>
           </div>
           <div class="guide-step-card">
             <div class="guide-step-tag" data-zh="第 3 步 · 手机扫一扫" data-en="Step 3 · Scan with Phone">第 3 步 · 手机扫一扫</div>
             <div class="guide-step-heading" data-zh="免密秒级跨屏同步" data-en="Instant Sync">免密秒级跨屏同步</div>
-            <div class="guide-step-desc" data-zh="拿起您的主力 iPhone（即使是国区账号已购 Pro），打开「一幕」扫描电视屏幕。所有片单、订阅与会员权益瞬间下发给大屏！" data-en="Scan the TV screen with your iPhone. Subscriptions and Pro status sync instantly.">拿起您的主力 iPhone（即使是国区账号已购 Pro），打开「一幕」扫描电视屏幕。所有片单、订阅与会员权益瞬间下发给大屏！</div>
+            <div class="guide-step-desc" data-zh="拿起您的主力 iPhone（即使是国区账号已购 Pro），打开「一幕」扫描电视屏幕。所有 VOD 影视、M3U 直播源、NAS 账号密码与会员权益瞬间下发给大屏！" data-en="Scan the TV screen with your iPhone. Subscriptions, VOD, M3U, NAS credentials and Pro status sync instantly.">拿起您的主力 iPhone（即使是国区账号已购 Pro），打开「一幕」扫描电视屏幕。所有 VOD 影视、M3U 直播源、NAS 账号密码与会员权益瞬间下发给大屏！</div>
           </div>
         </div>
 
-        <div class="guide-shot-frame" style="margin-top: 28px;">
+        <!-- 详细解答用户疑惑：Apple TV 界面到底有什么？支持哪些订阅与存储？ -->
+        <div style="margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--border-subtle);">
+          <div class="guide-step-tag" style="font-size: 13px;" data-zh="📺 大屏深度解析 · 界面标签与支持格式全景" data-en="📺 Big Screen In-Depth · Tabs & Supported Formats">📺 大屏深度解析 · 界面标签与支持格式全景</div>
+          <h4 style="font-size: 20px; font-weight: 700; color: var(--text); margin: 8px 0 16px;" data-zh="Apple TV 顶部 6 大原生标签：功能完整齐备" data-en="Apple TV 6 Native Navigation Tabs: Complete & Powerful">Apple TV 顶部 6 大原生标签：功能完整齐备</h4>
+          <p class="guide-lead-text" style="margin-bottom: 20px;" data-zh="一幕在 Apple TV 上绝非简陋的投屏接收器，而是**拥有完整自研播放内核（MPVKit）与独立界面架构的原生 tvOS 应用**。电视顶栏常驻 6 大功能模块，彻底覆盖客厅全场景需求：" data-en="YiMu on Apple TV is a full-featured native tvOS app powered by MPVKit, with 6 permanent tabs:">一幕在 Apple TV 上绝非简陋的投屏接收器，而是<strong>拥有完整自研播放内核（MPVKit）与独立界面架构的原生 tvOS 应用</strong>。电视顶栏常驻 6 大功能模块，彻底覆盖客厅全场景需求：</p>
+
+          <div class="guide-steps-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+            <div class="guide-step-card">
+              <div class="guide-step-tag" style="color: var(--primary);">TAB 1 · 片库海报墙</div>
+              <div class="guide-step-heading" data-zh="🎬 影视点播 (VOD)" data-en="🎬 VOD Poster Wall">🎬 影视点播 (VOD)</div>
+              <div class="guide-step-desc" data-zh="支持 VOD 影视订阅清单与 NAS 电影库。端侧直接渲染 4K HDR 超高清海报瀑布流、剧情简介、演职员表与剧集分集列表。" data-en="Supports VOD playlists and NAS movie libraries. Renders 4K HDR posters, synopsis, cast, and episode lists on device.">支持 VOD 影视订阅清单与 NAS 电影库。端侧直接渲染 4K HDR 超高清海报瀑布流、剧情简介、演职员表与剧集分集列表。</div>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="guide-step-tag" style="color: var(--primary);">TAB 2 · 继续观看</div>
+              <div class="guide-step-heading" data-zh="⏱️ 断点历史续播" data-en="⏱️ Resume Playback">⏱️ 断点历史续播</div>
+              <div class="guide-step-desc" data-zh="自动记录每部电影与剧集的播放秒数。与 tvOS 系统原生 Top Shelf 置顶架深度联动，在 Apple TV 桌面一键直接回到播放点。" data-en="Tracks playback progress across devices. Integrated with tvOS Top Shelf to resume directly from the TV home screen.">自动记录每部电影与剧集的播放秒数。与 tvOS 系统原生 Top Shelf 置顶架深度联动，在 Apple TV 桌面一键直接回到播放点。</div>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="guide-step-tag" style="color: var(--primary);">TAB 3 · 电视直播</div>
+              <div class="guide-step-heading" data-zh="📺 原生 M3U 直播流" data-en="📺 Live IPTV (M3U)">📺 原生 M3U 直播流</div>
+              <div class="guide-step-desc" data-zh="支持多套 M3U/TXT 直播源分组合并。遥控器左/右键毫秒级无缝换台，支持台标展示与回看流识别，老人小孩一秒上手。" data-en="Live IPTV with category grouping. Millisecond channel switching with remote left/right buttons.">支持多套 M3U/TXT 直播源分组合并。遥控器左/右键毫秒级无缝换台，支持台标展示与回看流识别，老人小孩一秒上手。</div>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="guide-step-tag" style="color: var(--primary);">TAB 4 · 文件夹</div>
+              <div class="guide-step-heading" data-zh="💾 私有 NAS 目录" data-en="💾 NAS Browser">💾 私有 NAS 目录</div>
+              <div class="guide-step-desc" data-zh="树状浏览群晖 (Synology)、极空间、威联通 (QNAP) 等局域网 SMB / WebDAV 共享目录，原盘大文件原画点播免转码。" data-en="Browse Synology, QNAP, and local SMB/WebDAV folders with original bitrate playback.">树状浏览群晖 (Synology)、极空间、威联通 (QNAP) 等局域网 SMB / WebDAV 共享目录，原盘大文件原画点播免转码。</div>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="guide-step-tag" style="color: var(--primary);">TAB 5 · 导入连接</div>
+              <div class="guide-step-heading" data-zh="⚡️ 免密跨端同步中枢" data-en="⚡️ Pairing & Sync Hub">⚡️ 免密跨端同步中枢</div>
+              <div class="guide-step-desc" data-zh="大屏端动态亮码，手机扫码下发 VOD、M3U 及 NAS 账号密码。右侧实时呈现「已收录影片、已配直播源、已连 NAS」大盘。" data-en="Real-time pairing hub. Phone scans QR to sync VOD, M3U playlists, and NAS credentials securely.">大屏端动态亮码，手机扫码下发 VOD、M3U 及 NAS 账号密码。右侧实时呈现「已收录影片、已配直播源、已连 NAS」大盘。</div>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="guide-step-tag" style="color: var(--primary);">TAB 6 · 设置</div>
+              <div class="guide-step-heading" data-zh="⚙️ 大屏体验调优" data-en="⚙️ TV Preferences">⚙️ 大屏体验调优</div>
+              <div class="guide-step-desc" data-zh="极简遥控交互，支持开启「自动续播」、「自动挂载双语字幕」、「启动自动匹配 TMDB 元数据」等核心选项。" data-en="Streamlined settings for TV remotes: auto-resume, auto-subtitle loading, and TMDB scraper preferences.">极简遥控交互，支持开启「自动续播」、「自动挂载双语字幕」、「启动自动匹配 TMDB 元数据」等核心选项。</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 为什么坚持扫码下发 NAS 密码与订阅？ -->
+        <div style="margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--border-subtle);">
+          <div class="guide-step-tag" style="font-size: 13px;" data-zh="🔐 深度问答 · 为什么使用扫码下发，而不是在电视上输账号密码？" data-en="🔐 Deep Dive · Why QR Sync Instead of Typing Passwords on TV?">🔐 深度问答 · 为什么使用扫码下发，而不是在电视上输账号密码？</div>
+          <h4 style="font-size: 20px; font-weight: 700; color: var(--text); margin: 8px 0 14px;" data-zh="安全与人体工程学的双重考量：终结遥控器输密码的噩梦" data-en="Security & Ergonomics: End the Nightmare of Typing Passwords on TV">安全与人体工程学的双重考量：终结遥控器输密码的噩梦</h4>
+          
+          <div class="guide-alert warning" style="margin-bottom: 20px;">
+            <div class="guide-alert-title" data-zh="痛点：用遥控器在电视上打字有多痛苦？" data-en="The Pain of Typing with a TV Remote">痛点：用遥控器在电视上打字有多痛苦？</div>
+            <div class="guide-alert-text" data-zh="在 Apple TV 上，通过遥控器触控板在一个由 26 个英文字母和特殊符号组成的虚拟键盘上逐字滑动，输入一个长达 80 位的 M3U/VOD 订阅 URL，或包含大小写和特殊符号的 20 位 NAS 密码，平均需要耗费 5-10 分钟，一旦打错一个字符就前功尽弃，而且密码会被明文投射在客厅大屏幕上被所有人看到。" data-en="Typing an 80-character M3U URL or 20-character NAS password using a TV remote takes 5-10 minutes, is error-prone, and displays passwords publicly on the living room screen.">
+              在 Apple TV 上，通过遥控器触控板在一个由 26 个英文字母和特殊符号组成的虚拟键盘上逐字滑动，输入一个长达 80 位的 M3U/VOD 订阅 URL，或包含大小写和特殊符号的 20 位 NAS 密码，平均需要耗费 5-10 分钟，一旦打错一个字符就前功尽弃，而且密码会被明文投射在客厅大屏幕上被所有人看到。
+            </div>
+          </div>
+
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="guide-step-tag">优势 1 · 绝不泄漏</div>
+              <div class="guide-step-heading" data-zh="局域网端对端加密直达" data-en="End-to-End LAN Encryption">局域网端对端加密直达</div>
+              <div class="guide-step-desc" data-zh="手机扫码后，走家庭局域网 HTTPS 加密直传通道。NAS 账号密码直接注入 Apple TV 本机硬件钥匙串 (Keychain)，不经过任何第三方服务器，电视屏幕上永远不显示明文密码。" data-en="Encrypted LAN transfer directly into Apple TV hardware Keychain. Zero cloud relay, zero plaintext exposure.">手机扫码后，走家庭局域网 HTTPS 加密直传通道。NAS 账号密码直接注入 Apple TV 本机硬件钥匙串 (Keychain)，不经过任何第三方服务器，电视屏幕上永远不显示明文密码。</div>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="guide-step-tag">优势 2 · 全量打包</div>
+              <div class="guide-step-heading" data-zh="VOD + M3U + NAS 一键齐发" data-en="VOD + M3U + NAS All-in-One">VOD + M3U + NAS 一键齐发</div>
+              <div class="guide-step-desc" data-zh="您在 iPhone 或 Mac 上已经整理好的影视片单 (VOD)、上百个电视直播频道 (M3U)、以及威联通/群晖的共享连接，手机扫一次，大屏全量就位，无需重复劳动。" data-en="One scan syncs your VOD lists, hundreds of live M3U channels, and NAS mount points simultaneously.">您在 iPhone 或 Mac 上已经整理好的影视片单 (VOD)、上百个电视直播频道 (M3U)、以及威联通/群晖的共享连接，手机扫一次，大屏全量就位，无需重复劳动。</div>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="guide-step-tag">备用方案 · 隔空输入</div>
+              <div class="guide-step-heading" data-zh="支持 iOS 遥控器键盘粘贴" data-en="iOS Remote Keyboard Support">支持 iOS 遥控器键盘粘贴</div>
+              <div class="guide-step-desc" data-zh="如果您习惯直接在电视上配置，只要拿起 iPhone 呼出控制中心自带的「Apple TV 遥控器」，当电视端聚焦到输入框时，手机键盘会自动弹出，支持直接复制粘贴！" data-en="Alternatively, open iOS Control Center Apple TV Remote to paste long URLs and credentials directly into input fields.">如果您习惯直接在电视上配置，只要拿起 iPhone 呼出控制中心自带的「Apple TV 遥控器」，当电视端聚焦到输入框时，手机键盘会自动弹出，支持直接复制粘贴！</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 真实截图展示 -->
+        <div class="guide-shot-frame" style="margin-top: 36px;">
           <img src="assets/shot-tvos.png" alt="Apple TV 客厅沉浸海报墙">
-          <div class="guide-shot-caption" data-zh="Apple TV 原生大屏：4K HDR 超高清海报瀑布流 · 客厅影院极致视听" data-en="Apple TV: 4K HDR poster wall and home theater experience">
-            Apple TV 原生大屏：4K HDR 超高清海报瀑布流 · 客厅影院极致视听
+          <div class="guide-shot-caption" data-zh="Apple TV 原生大屏：4K HDR 超高清海报瀑布流 · TMDB 沉浸详情页 · 客厅影院极致视听" data-en="Apple TV: 4K HDR Movie Poster Wall and TMDB Details in Home Theater">
+            Apple TV 原生大屏：4K HDR 超高清海报瀑布流 · TMDB 沉浸详情页 · 客厅影院极致视听
           </div>
         </div>
 
         <div class="guide-shot-frame" style="margin-top: 24px;">
           <img src="assets/shot-tvos-import.png" alt="Apple TV 大屏免输密码扫码同步">
-          <div class="guide-shot-caption" data-zh="Apple TV「导入连接」：免去遥控器逐字输入长链接与密码，手机扫码即可极速同步" data-en="Apple TV Import: Scan with phone to skip cumbersome remote typing">
-            Apple TV「导入连接」：免去遥控器逐字输入长链接与密码，手机扫码即可极速同步
+          <div class="guide-shot-caption" data-zh="Apple TV「导入连接」中枢：支持 VOD 影视、M3U 直播清单、NAS 存储凭据免密扫码下发与实时状态仪表盘" data-en="Apple TV Import Hub: Scan to sync VOD, M3U playlists, and NAS credentials securely">
+            Apple TV「导入连接」中枢：支持 VOD 影视、M3U 直播清单、NAS 存储凭据免密扫码下发与实时状态仪表盘
           </div>
         </div>
+
       </div>
     </div>
+
 
     <!-- 章节 5: 常见问题排错 (FAQ) -->
     <div class="guide-chapter" id="faq">
